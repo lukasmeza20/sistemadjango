@@ -87,8 +87,13 @@ def tienda(request):
 
 @csrf_exempt
 def ficha(request, id):
+
+    dolar = obtener_valor_usd()
+    prod = Producto.objects.get(idprod = id)
+    precio_convertido = prod.precio * dolar 
+
     cantidad_facturas = Factura.objects.filter(idprod=id).count()
-    data = {"mesg": "", "producto": None,"cantidad_facturas":cantidad_facturas}
+    data = {"mesg": "", "producto": None,"precio_convertido":precio_convertido ,"cantidad_facturas":cantidad_facturas}
 
     # Cuando el usuario hace clic en el boton COMPRAR, se ejecuta el METODO POST del
     # formulario de ficha.html, con lo cual se redirecciona la página para que
@@ -111,6 +116,19 @@ def ficha(request, id):
     # para que se muestren los datos de la FICHA
     data["producto"] = Producto.objects.get(idprod=id)
     return render(request, "core/ficha.html", data )
+
+def obtener_valor_usd():
+    url = 'https://api.exchangerate-api.com/v4/latest/CLP'
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            datos = response.json()
+            valor_usd = datos['rates']['USD']
+            return valor_usd
+    except:
+        pass
+    return 0
+
 
 @csrf_exempt
 def administrar_productos(request, action, id):
