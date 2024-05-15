@@ -1,0 +1,89 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+<link href="{% static 'core/css/estilos.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">     
+        <h3 class="titulo">Mis Solicitudes de Servicio (Vista de Técnico)</h3>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Nro SS</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Tipo SS</th>
+                <th scope="col">Fecha Visita</th>
+                <th scope="col">Hora Visita</th>
+                <th scope="col">Técnico</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estado SS</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Ana Torres</td>
+                <td>Instalación</td>
+                <td>2024-04-09</td>
+                <td>09:00</td>
+                <td>Juan Gatica</td>
+                <td>Instalar equipo</td>
+                <td>Aceptada</td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-primary">Modificar</button>
+                  <button type="button" class="btn btn-sm btn-danger">Cerrar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Juan Pérez</td>
+                <td>Mantención</td>
+                <td>2024-04-10</td>
+                <td>10:00</td>
+                <td>Juan Gatica</td>
+                <td>Limpiar filtro</td>
+                <td>Aceptada</td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-primary">Modificar</button>
+                  <button type="button" class="btn btn-sm btn-danger">Cerrar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Maria Ayala</td>
+                <td>Instalación</td>
+                <td>2024-04-11</td>
+                <td>11:00</td>
+                <td>Juan Gatica</td>
+                <td>Instalar equipo</td>
+                <td>Cerrada</td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-primary">Modificar</button>
+                  <button type="button" class="btn btn-sm btn-danger">Cerrar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Jhon Soto</td>
+                <td>Instalación</td>
+                <td>2024-04-12</td>
+                <td>12:00</td>
+                <td>Juan Gatica</td>
+                <td>Instalar equipo</td>
+                <td>Modificada</td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success">Aceptar</button>
+                  <button type="button" class="btn btn-sm btn-primary">Modificar</button>
+                  <button type="button" class="btn btn-sm btn-danger">Cerrar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+{% endblock content %}

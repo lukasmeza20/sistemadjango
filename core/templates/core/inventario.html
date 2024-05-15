@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Bootstrap E-commerce Templates</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
+		<link href="themes/css/bootstrappage.css" rel="stylesheet"/>
+		
+		<!-- global styles -->
+		<link href="themes/css/flexslider.css" rel="stylesheet"/>
+		<link href="themes/css/main.css" rel="stylesheet"/>
+
+		<!-- scripts -->
+		<script src="themes/js/jquery-1.7.2.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>				
+		<script src="themes/js/superfish.js"></script>	
+		<script src="themes/js/jquery.scrolltotop.js"></script>
+		<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="themes/js/respond.min.js"></script>
+		<![endif]-->
+		<link rel="icon" type="image/png" href="themes/images/logo.png">
+	</head>
+    <body>		
+		<div id="top-bar" class="container">
+			<div class="row container-fluid">
+					<ul class="user-menu">
+						<a href="index.html" class="logo pull-left"><img src="themes/images/logo.png" class="site_logo" alt=""></a>			
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="administrar_tienda.html">Administrar Tienda</a></li>
+						<li><a href="sobre_nosotros.html">Nosotros</a></li>
+						<li><a href="index.html">Cerrar Sesión</a></li>		
+					</ul>
+			</div>
+		</div>
+		<div id="wrapper" class="container">				
+			<section class="main-content">
+			    <br>
+				<h2><span>Mantenedor de bodega</span></h2>
+                <div class="span5">
+					<table >
+						<tr>
+							<td><strong>ID:</strong></td>
+							<td><input type="text"  Placeholder=""></td>
+						</tr>
+						<tr>
+							<td><strong>Categoria:</strong></td>
+							<td><select name="" id="cbox1">
+								<option value="0"></option>
+								<option value="1">Perros</option>
+								<option value="2">Gatos</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><strong>Nombre:</strong></td>
+							<td><select name="" id="cbox2">
+								<option value="0"></option>
+								<option value="1">Saco alimento Royal Canin</option>
+								<option value="2">Saco alimento Don Cuchito</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td><strong>Cantidad:</strong></td>
+							<td><input type="text"  Placeholder=""></td>
+						</tr>
+					</table>
+				</div>
+				<div class="span3 col">
+					<div class="block">		
+						<img src="https://laikamascotas.cl/cdn-cgi/image/format=auto,quality=80,sharpen=1/https://laikapp.s3.amazonaws.com/dev_images_products/76140_152974_Royal_Canin___Maxi_Adulto_1650473979_500x500.jpg" alt="" sizes="" srcset="">
+					</div>
+				</div>
+				
+			</section>
+			<section class="main-content">				
+				<div class="row">
+					<div class="span9">	
+						<div class="col1">
+							<button class="btn" id="btn1" onclick="alert('Producto agregado');">
+								Agregar
+							</button>
+							<button class="btn" id="btn2" onclick="alert('Producto creado');">
+								Nuevo
+							</button>
+							<button class="btn" id="btn3" >
+								Limpiar
+							</button>
+						</div>			
+						<table class="table table-bordered" style="border-collapse: 3px; color: black;">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Categoria</th>
+									<th>Nombre</th>
+									<th>Estado</th>
+									<th>Opciones</th>
+								</tr>
+							</thead>
+							<tbody id="res">
+									  
+							</tbody>
+						</table>					
+					</div>
+				</div>
+			</section>			
+		</div>
+		<script src="themes/js/common.js"></script>
+		<script src="ajax1.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#checkout').click(function (e) {
+					document.location.href = "checkout.html";
+				})
+			});
+		</script>		
+    </body>
+</html>

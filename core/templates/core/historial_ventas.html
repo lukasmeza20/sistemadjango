@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+<link href="{% static 'core/css/estilos.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">     
+        <h3 class="titulo">Historial de Ventas de la Empresa (Vista del administrador)</h3>
+        <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Nro Fac</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Descripción</th>
+                <th>Monto</th>
+                <th>Nro GD</th>
+                <th>Estado GD</th>
+                <th>Nro SS</th>
+                <th>Estado SS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Jhon Soto</td>
+                <td>2024-04-01</td>
+                <td>Descripción 1</td>
+                <td>$25.000</td>
+                <td>GD-001</td>
+                <td>Entregado</td>
+                <td>SS-001</td>
+                <td>Aceptada</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Juan Pérez</td>
+                <td>2024-04-02</td>
+                <td>Descripción 2</td>
+                <td>$25.000</td>
+                <td>GD-002</td>
+                <td>Entregado</td>
+                <td>SS-002</td>
+                <td>Aceptada</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Mario Ayala</td>
+                <td>2024-04-03</td>
+                <td>Descripción 3</td>
+                <td>$25.000</td>
+                <td>GD-003</td>
+                <td>Despachado</td>
+                <td>SS-003</td>
+                <td>Aceptada</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Ana Torres</td>
+                <td>2024-04-04</td>
+                <td>Descripción 4</td>
+                <td>$25.000</td>
+                <td>GD-004</td>
+                <td>Entregado</td>
+                <td>SS-004</td>
+                <td>Aceptada</td>
+              </tr>
+            </tbody>
+          </table>
+</div>
+{% endblock content %}

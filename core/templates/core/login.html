@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+    <!-- bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
+    <link href="themes/css/bootstrappage.css" rel="stylesheet"/>
+    
+    <!-- global styles -->
+    <link href="themes/css/flexslider.css" rel="stylesheet"/>
+    <link href="themes/css/main.css" rel="stylesheet"/>
+
+    <!-- scripts -->
+    <script src="themes/js/jquery-1.7.2.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>				
+    <script src="themes/js/superfish.js"></script>	
+    <script src="themes/js/jquery.scrolltotop.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" integrity="sha512-FOhq9HThdn7ltbK8abmGn60A/EMtEzIzv1rvuh+DqzJtSGq8BRdEN0U+j0iKEIffiw/yEtVuladk6rsG4X6Uqg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="icon" type="image/png" href="themes/images/logo.png">
+</head>
+<body>
+    <body>		
+		<div id="top-bar" class="container">
+			
+			<div class="row container-fluid">
+					<ul class="user-menu">
+						<a href="inicio_cliente.html" class="logo pull-left"><img src="themes/images/logo.png" class="site_logo" alt=""></a>			
+						<li><a href="inicio_cliente.html">Inicio</a></li>
+						<li><a href="sobre_nosotros.html">Nosotros</a></li>
+						<li><a href="#">Mis datos</a></li>
+						<li><a href="mis_compras.html">Mis compras</a></li>					
+						<li><a href="carrito_de_compras.html">Carrito</a></li>
+						<li><a href="index.html">Cerrar sesión</a></li>		
+					</ul>
+			</div>
+		</div>		
+			<section class="header_text sub">
+			<br>
+            <div style="text-align: center;">
+                <h1>
+                    Ingresar a la tienda
+                </h1>
+            </div>
+			</section>			
+			<section class="main-content">				
+				<div class="row">
+					<div class="span4"></div>
+					<div class="span4">
+						<form id="login" name="login" action="#" method="post">
+							<input type="hidden" name="next" value="/">
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label">Correo</label>
+									<div class="controls">
+										<input name="correo" id="correo" type="text" placeholder="ingresa tu usuario" id="username" class="input-xlarge">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Contraseña</label>
+									<div class="controls">
+										<input name="constraseña" id="constraseña" type="password" placeholder="ingresa tu contraseña" id="password" class="input-xlarge">
+									</div>
+								</div>
+								<div class="control-group">
+									<button type="submit" class="btn btn-primary">ingresar</button>
+									<hr>
+									<a tabindex="4" href="#" title="Registrate">registrate</a>
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="">olvide mi contraseña</a>
+								</div>
+							</fieldset>
+						</form>				
+					</div>
+                </div>
+                <br><br><br>
+                <div style="text-align: center;">
+                    <br>
+                    <br>
+                    <a href="inicio_cliente.html">presiona este link para simular que entraste como cliente</a>
+                    <br>
+                    <br>
+                    <a href="main_administrador.html">presiona este link para simular que entraste como administrador</a>
+                </div>
+            </section>			
+			<section id="footer-bar">
+				<div class="row">
+					<div class="span3">
+						<h4>Navegar</h4>
+						<ul class="nav">
+                            <li><a href="./index.html">Inicio</a></li>
+                            <li><a href="./cart.html">Carrito</a></li>
+                            <li><a href="./register.html">Inicio de sesion</a></li>						
+						</ul>					
+					</div>
+					<div class="span4">
+						<h4>Mi cuenta</h4>
+						<ul class="nav">
+							<li><a href="#">Mi cuenta</a></li>
+							<li><a href="#">Historial de pedidos</a></li>
+							<li><a href="#">Lista de deseos</a></li>
+							<li><a href="#">Novedades</a></li>
+						</ul>
+					</div>
+					<div class="span5">
+						<p class="logo"><img src="themes/images/logo.png" class="site_logo" alt=""></p>
+						<p>Shopper es la tienda online más completa para mascotas creada por pet lovers para pet lovers!. Somos la tienda en línea de mascotas con mayor variedad de productos y servicios a domicilio de Latinoamérica (Colombia, Chile y México), contamos con más de 4.000 productos (alimentos, dietas naturales, snacks, medicinas, higiene y accesorios) y próximamente, más de 17 servicios como (medicina veterinaria prepagada, veterinario a domicilio, vacunación, baños, funeraria, entrenador, cuidadores, información de colegios, fundaciones, entre otros.</p>
+						<br/>
+					</div>					
+				</div>	
+			</section>
+        </div>
+    <script src="js/validacion_login.js"></script>
+	</body>
+</html>

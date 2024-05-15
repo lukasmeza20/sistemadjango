@@ -1,0 +1,266 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Shopper</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+        <!-- bootstrap -->
+
+        <link href="{% static 'core/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">      
+        
+        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="themes/css/bootstrappage.css" rel="stylesheet"/>
+        
+        <!-- global styles -->
+        <link href="themes/css/flexslider.css" rel="stylesheet"/>
+        <link href="themes/css/main.css" rel="stylesheet"/>
+
+        <!-- scripts -->
+        <script src="{% static 'core/themes/js/jquery-1.7.2.min.js'%}"></script>
+        <script src="{% static 'core/bootstrap/js/bootstrap.min.js'%}"></script>               
+        <script src="{% static 'core/themes/js/superfish.js'%}"></script>  
+        <script src="{% static 'core/themes/js/jquery.scrolltotop.js'%}"></script>
+        <!--[if lt IE 9]>           
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="{% static 'core/js/respond.min.js'%}"></script>
+        <![endif]-->
+        <link rel="icon" type="image/png" href="themes/images/logo.png">
+    </head>
+    <body>      
+        <div id="top-bar" class="container">
+            <div class="row container-fluid">
+                    <ul class="user-menu">
+                        <a href="index.html" class="logo pull-left"><img src="{% static 'core/themes/images/logo.png'%}" class="site_logo" alt=""></a>         
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="registro.html">Registrate</a></li>
+                        <li><a href="sobre_nosotros.html">Nosotros</a></li>
+                        <li><a href="login.html">Ingresar</a></li>      
+                    </ul>
+            </div>
+        </div>
+        <div id="wrapper" class="container">
+            <section  class="homepage-slider" id="home-slider">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <img src="{% static 'core/themes/images/carousel/banner-1.jpg'%}" alt="" />
+                        </li>
+                        <li>
+                            <img src="{% static 'core/themes/images/carousel/banner-2.png'%}" alt="" />
+                        </li>
+                    </ul>
+                </div>          
+            </section>
+            <section class="header_text">
+                Bienvenido a Shopper tu tienda amigable de mascotas
+            </section>
+            <section class="main-content">  
+                <div class="row">                                                   
+                        <ul class="thumbnails ">
+                            <li class="span3">
+                                <div class="product-box">
+                                    <span class="sale_tag"></span>                                              
+                                    <a href="./ficha_producto_anon.html"><img alt="" width="200px" height="200px" src="{% static 'core/themes/images/Perros/alimento/alimentoP1.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Bakery Chicken Puppy</a><br/>
+                                    <p>Alimento completo para cachorros de razas medianas y grandes</p>
+                                    <p class="price">12 Kg  $53.990</p>
+                                    
+                                </div>
+                            </li>  
+                            <li class="span3">
+                                <div class="product-box">                                               
+                                    <a href="./ficha_producto_anon.html"><img alt="" width="200px" height="200px" src="{% static 'core/themes/images/Perros/alimento/alimentoP2.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Wellness Core Dog Original</a><br/>
+                                    <p>Alimento completo para perros, sabor a pavo y pollo</p>
+                                    <p class="price">10  Kg  $59.990</p>
+                                    
+                                </div>
+                            </li>
+                            <li class="span3">
+                                <div class="product-box">
+                                    <span class="sale_tag"></span>                                              
+                                    <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Perros/alimento/alimentoP3.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Dogxtreme Adult Salmon & Rice</a><br/>
+                                    <p>Para una mejora visible del pelaje, elaborado con salmon</p>
+                                    <p class="price">12 Kg  $31.990</p>
+                                    
+                                </div>
+                            </li>
+                            <li class="span3">
+                                <div class="product-box">                                               
+                                    <span class="sale_tag"></span>
+                                    <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Perros/alimento/alimentoP4.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Salvaje Cachorro Pollo</a><br/>
+                                    <p>Alimento especial para cachorros con ingredientes de primera calidad</p>
+                                    <p class="price">15 Kg  $29.990</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnails listing-products">
+                            <li class="span3">
+                                <div class="product-box">
+                                    <span class="sale_tag"></span>                                              
+                                    <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Perros/accesorios/accesorioP1.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Ruffwear Knot A Collar Red</a><br/>
+                                    <p>Correa sencilla, reflectiva, ajustable para perros</p>
+                                    <p class="price">Talla L  $20.990</p>
+                                </div>
+                            </li>  
+                            <li class="span3">
+                                <div class="product-box">                                               
+                                    <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Perros/accesorios/accesorioP2.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Eco Moon Cushion - Blue</a><br/>
+                                    <p>Cama suave para perros 100% ecológica</p>
+                                    <p class="price">Talla S  $33.990</p>                                   
+                                </div>
+                            </li>
+                            <li class="span3">
+                                <div class="product-box">
+                                    <span class="sale_tag"></span>                                              
+                                    <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Perros/accesorios/accesorioP3.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Oleron Colchon Oval Azul</a><br/>
+                                    <p>Oleron Colchon acolchonado y cómodo</p>
+                                    <p class="price">Talla S  $12.990</p>                                   
+                                </div>
+                            </li>
+                            <li class="span3">
+                                <div class="product-box">
+                                    <span class="sale_tag"></span>                                              
+                                    <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Perros/accesorios/accesorioP4.jpg'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Front Range - Harness</a><br/>
+                                    <p>Arnés acolchonado y cómodo</p>
+                                    <p class="price">Talla S  $38.990</p>                               
+                                </div>
+                            </li>       
+                        </ul>
+                        <ul class="thumbnails listing-products">
+                            <li class="span3">
+                                <div class="product-box">
+                                    <span class="sale_tag"></span>                                              
+                                    <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/alimento/alimentoG1.png'%}"></a><br/>
+                                    <a href="./ficha_producto_anon.html" class="title">Wellness Core Cat Ocean</a><br/>
+                                    <p>Alimento completo para gatos con salmón del océano y atún</p>
+                                    <p class="price">4 Kg  $42.990</p>
+                                </div>
+                            </li>  
+                        <li class="span3">
+                            <div class="product-box">                                               
+                                <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/alimento/alimentoG2.png'%}"></a><br/>
+                                <a href="./ficha_producto_anon.html" class="title">Fit Formula Gato Adulto</a><br/>
+                                <p>Alimento premium para gatos adultos de 1 a 7 años</p>
+                                <p class="price">10  Kg  $24.990</p>
+                            </div>
+                        </li>
+                        <li class="span3">
+                            <div class="product-box">
+                                <span class="sale_tag"></span>                                              
+                                <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/alimento/alimentoG3.png'%}"></a><br/>
+                                <a href="./ficha_producto_anon.html" class="title">Wellness Core Cat Original Sterilised Salmon</a><br/>
+                                <p>Alimento completo para gatos adultos esterilizados con salmón</p>
+                                <p class="price">4 Kg  $42.990</p>                                  
+                            </div>
+                        </li>
+                        <li class="span3">
+                            <div class="product-box">
+                                <span class="sale_tag"></span>                                              
+                                <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/alimento/alimentoG4.png'%}"></a><br/>
+                                <a href="./ficha_producto_anon.html" class="title">Proplan Kitten Optistart</a><br/>
+                                <p>Alimento súper premium para gatos cachorros(gatitos)</p>
+                                <p class="price">3 Kg  $28.990</p>                                  
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="thumbnails listing-products">
+                        <li class="span3">
+                            <div class="product-box">
+                                <span class="sale_tag"></span>                                              
+                                <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/accesorios/accesorioG1.jpg'%}"></a><br/>
+                                <a href="./ficha_producto_anon.html" class="title">Calendario Solidario 2022</a><br/>
+                                <p>Calendario 100% solidario para fundaciones de mascotas en peligro</p>
+                                <p class="price">1 Unidad $1.990</p>
+                            </div>
+                        </li>  
+                        <li class="span3">
+                            <div class="product-box">                                               
+                                <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/accesorios/accesorioG2.jpg'%}"></a><br/>
+                                <a href="./ficha_producto_anon.html" class="title">Dental Care Set Menta</a><br/>
+                                <p>Set de cuidado dental para gatos</p>
+                                <p class="price">1 Set $4.990</p>
+                            </div>
+                        </li>
+                        <li class="span3">
+                            <div class="product-box">
+                                <span class="sale_tag"></span>                                              
+                                <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/accesorios/accesorioG3.jpg'%}"></a><br/>
+                                <a href="./ficha_producto_anon.html" class="title">Baño Sanitario - Tina</a><br/>
+                                <p>Baño sanitario con diseño sencillo</p>
+                                <p class="price">Talla M $16.990</p>                                    
+                            </div>
+                        </li>
+                        <li class="span3">
+                            <div class="product-box">
+                                <span class="sale_tag"></span>                                              
+                                <a href="./ficha_producto_anon.html"><img alt="" src="{% static 'core/themes/images/Gatos/alimento/alimentoG4.png'%}"></a><br/>
+                                <a href="./ficha_producto_anon.html" class="title">Eco Tipi</a><br/>
+                                <p>Cama ecologica en forma de tipi con cojin blando</p>
+                                <p class="price">1 Unidad $23.990</p>                                   
+                            </div>
+                        </li>
+                    </ul>                               
+                </div>  
+            <section class="our_client">
+                <h4 class="title"><span class="text">Manufactures</span></h4>
+                <div class="row">                   
+                    <div class="span2">
+                        <a href=""><img alt="" src="{% static 'core/themes/images/clients/14.png'%}"></a>
+                    </div>
+                    <div class="span2">
+                        <a href=""><img alt="" src="{% static 'core/themes/images/clients/1.png'%}"></a>
+                    </div>
+                    <div class="span2">
+                        <a href=""><img alt="" src="{% static 'core/themes/images/clients/2.png'%}"></a>
+                    </div>
+                    <div class="span2">
+                        <a href=""><img alt="" src="{% static 'core/themes/images/clients/3.png'%}"></a>
+                    </div>
+                    <div class="span2">
+                        <a href=""><img alt="" src="{% static 'core/themes/images/clients/4.png'%}"></a>
+                    </div>
+                </div>
+            </section>
+            <section id="footer-bar">
+                <div class="row">
+                    <div class="span3 abajo">
+                        <h4>Navegar</h4>
+                        <ul class="nav">
+                            <li><a href="index.html">Inicio</a></li>  
+                            <li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+                            <li><a href="registro.html">Registrate</a></li>
+                            <li><a href="login.html">Inicio de sesion</a></li>                          
+                        </ul>                   
+                    </div>                      
+                </div>  
+            </section>
+        </div>
+        <script src="{% static 'core/themes/js/common.js'%}"></script>
+        <script src="{% static 'core/themes/js/jquery.flexslider-min.js'%}"></script>
+        <script type="text/javascript">
+            $(function() {
+                $(document).ready(function() {
+                    $('.flexslider').flexslider({
+                        animation: "fade",
+                        slideshowSpeed: 4000,
+                        animationSpeed: 600,
+                        controlNav: false,
+                        directionNav: true,
+                        controlsContainer: ".flex-container" // the container that holds the flexslider
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

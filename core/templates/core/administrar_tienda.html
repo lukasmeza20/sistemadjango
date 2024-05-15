@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Bootstrap E-commerce Templates</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		
+		<!-- bootstrap -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
+		<link href="themes/css/bootstrappage.css" rel="stylesheet"/>
+		<link href="themes/css/adicion.css" rel="stylesheet"/>
+		
+		<!-- global styles -->
+		<link href="themes/css/main.css" rel="stylesheet"/>
+		<link href="themes/css/jquery.fancybox.css" rel="stylesheet"/>
+				
+		<!-- scripts -->
+		<script src="themes/js/jquery-1.7.2.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>				
+		<script src="themes/js/superfish.js"></script>	
+		<script src="themes/js/jquery.scrolltotop.js"></script>
+		<script src="themes/js/jquery.fancybox.js"></script>
+		<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+		<link rel="icon" type="image/png" href="themes/images/logo.png">
+	</head>
+    <body>		
+		<div id="top-bar" class="container">
+			<div class="row container-fluid">
+					<ul class="user-menu">
+						<a href="index.html" class="logo pull-left"><img src="themes/images/logo.png" class="site_logo" alt=""></a>			
+						<li><a href="index.html">Inicio</a></li>
+						<li><a href="administrar_tienda.html">Administrar Tienda</a></li>
+						<li><a href="sobre_nosotros.html">Nosotros</a></li>
+						<li><a href="index.html">Cerrar Sesión</a></li>
+						<li><a href="registro_ventas.html">registro ventas</a></li>		
+					</ul>
+			</div>
+		</div>
+
+
+		<div id="wrapper" class="container">
+			</section>
+			<br>
+			<div>
+				<section class="main-content">				
+					<div class="row">
+						<div class="span9">					
+							<h4 class="title"><span class="text"><strong>ADMINISTRAR</strong></span></h4>
+							<div class="adicion">
+								<p class="accordion-toggle" data-toggle="collapse" href="#collapseOne">Opciones</p>
+							</div>
+								<div  id="collapseOne" class="accordion-body in collapse">
+									<div class="control-group">
+										<button><a href="maestro_usuario.html">mantenedor de usuario</a></button>
+									</div>								<div class="control-group">
+										<button><a href="maestro_producto.html">mantenedor de producto</a></button>
+									</div>								<div class="control-group">
+										<button><a href="registro_ventas.html">historial de ventas</a></button>
+									</div>								<div class="control-group">
+										<button><a href="inventario.html">mantenedor de bodega</a></button>
+									</div>
+									</div>								<div class="control-group">
+										<button><a href="registro_ventas.html">Registro de ventas</a></button>
+									</div>
+								</div>
+						</div>
+					</div>
+				</section>
+			</div>			
+			<section id="footer-bar">
+				<div class="row">
+					<div class="span3 abajo">
+						<h4>Navegar</h4>
+						<ul class="nav">
+							<li><a href="index.html">Inicio</a></li>  
+							<li><a href="sobre_nosotros.html">Sobre nosotros</a></li>
+							<li><a href="registro.html">Registrate</a></li>
+							<li><a href="login.html">Inicio de sesion</a></li>							
+						</ul>					
+					</div>						
+				</div>	
+			</section>
+		</div>
+		<script src="themes/js/common.js"></script>
+		<script>
+			$(function () {
+				$('#myTab a:first').tab('show');
+				$('#myTab a').click(function (e) {
+					e.preventDefault();
+					$(this).tab('show');
+				})
+			})
+			$(document).ready(function() {
+				$('.thumbnail').fancybox({
+					openEffect  : 'none',
+					closeEffect : 'none'
+				});
+				
+				$('#myCarousel-2').carousel({
+                    interval: 2500
+                });								
+			});
+		</script>
+    </body>
+</html>

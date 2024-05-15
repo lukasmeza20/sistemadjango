@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Bootstrap E-commerce Templates</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
+		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
+		<link href="themes/css/bootstrappage.css" rel="stylesheet"/>
+		
+		<!-- global styles -->
+		<link href="themes/css/flexslider.css" rel="stylesheet"/>
+		<link href="themes/css/main.css" rel="stylesheet"/>
+
+		<!-- scripts -->
+		<script src="themes/js/jquery-1.7.2.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>				
+		<script src="themes/js/superfish.js"></script>	
+		<script src="themes/js/jquery.scrolltotop.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" integrity="sha512-FOhq9HThdn7ltbK8abmGn60A/EMtEzIzv1rvuh+DqzJtSGq8BRdEN0U+j0iKEIffiw/yEtVuladk6rsG4X6Uqg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+        <link rel="icon" type="image/png" href="themes/images/logo.png">
+	</head>
+    <body>		
+		<div id="top-bar" class="container">
+			
+			<div class="row container-fluid">
+					<ul class="user-menu">
+						<a href="inicio_cliente.html" class="logo pull-left"><img src="themes/images/logo.png" class="site_logo" alt=""></a>			
+						<li><a href="inicio_cliente.html">Inicio</a></li>
+						<li><a href="sobre_nosotros.html">Nosotros</a></li>
+						<li><a href="#">Mis datos</a></li>
+						<li><a href="mis_compras.html">Mis compras</a></li>					
+						<li><a href="carrito_de_compras.html">Carrito</a></li>
+						<li><a href="index.html">Cerrar sesión</a></li>		
+					</ul>
+			</div>
+		</div>
+
+    <div class="container">
+        <br><br>
+        <div class="borde-bootstrap-row">
+            <h4>Formulario de Registro</h4>
+        </div>
+        <br>
+        <form class="form-stacked" action="registro.php" method="post" name="registro" id="registro">
+                <div class="row borde-bootstrap-row">
+                    <div class="span6">
+                        <div class="form-group">
+                            <label for="rut" class="control-label">RUT</label>
+                            <div class="controls">
+                                <input class="form-control" type="text" name="rut" id="rut" 
+                                aria-describedby="rut-help" placeholder="Ingresa tu RUT">
+                            </div>
+                            <small id="rut-help" class="form-text text-muted">
+                                Escribe tu RUT sin puntos y con guión, por ejemplo: 16560241-2
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombres" class="control-label">Nombres</label>
+                            <div class="controls">
+                            <input class="form-control" type="text" name="nombres" id="nombres" 
+                                placeholder="Escribe aquí tus nombres">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidos" class="control-label">Apellidos</label>
+                            <div class="controls">
+                            <input class="form-control" type="text" name="apellidos" id="apellidos" 
+                                placeholder="Escribe aquí tus apellidos">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="correo" class="control-label">Correo</label>
+                            <div class="controls">
+                            <input class="form-control" type="email" name="correo" id="correo" 
+                                aria-describedby="correo-help" placeholder="Escribe aquí tu correo">
+                            </div>
+                            <small id="correo-help" class="form-text text-muted">
+                                Escribe tu correo incluyendo: nombre, @ y dominio, por ejemplo: atorres@duocuc.cl
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="dirusu" class="control-label">Dirección</label>
+                            <div class="controls">
+                            <textarea class="form-control" name="dirusu" id="dirusu" cols="60" rows="5" 
+                                aria-describedby="dirusu-help"placeholder="Escribe aquí tu dirección"></textarea>
+                            </div>
+                            <small id="dirusu-help" class="form-text text-muted">
+                                Escribe tu direción completa con: calle, número, comuna y región
+                            </small>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="consubscripcion" name="consubscripcion" 
+                                aria-describedby="consubscripcion-help">
+                            <label class="form-check-label" for="consubscripcion">Con subscripción</label>
+                            <small id="consubscripcion-help" class="form-text text-muted">
+                                Deseo subscribirme con un aporte de $3.000 mensuales
+                                y obtener un 5% de descuento en mis copmpras
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <br>
+                            <label for="password" class="control-label">Contraseña</label>
+                            <div class="controls">
+                            <input class="form-control" type="password" name="password" id="password" 
+                                aria-describedby="password-help" placeholder="Escribe aquí tu contraseña">
+                            </div>
+                            <small id="password-help" class="form-text text-muted">
+                                La contraseña debe tener un mínimo de 10 caracteres y 
+                                debe contener al menos una mayúscula y un número
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password2" class="control-label">Repetir contraseña</label>
+                            <div class="controls">
+                            <input class="form-control" type="password" name="password2" id="password2" 
+                                placeholder="Repite aquí tu contraseña">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="form-group">
+                            <img src="images/cristian_gomez.jpg" alt="" name="fotoperfil" id="fotoperfil">
+                            <br><br>
+                            <input class="form-control-file" type="file" name="buscarfoto" id="buscarfoto">
+                        </div>
+                    </div>
+                </div>
+                <div class="row borde-bootstrap-row">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </div>
+                <hr>
+                <div class="actions"><input tabindex="9" class="btn btn-inverse large" type="submit" value="Create your account"></div>
+            </fieldset>
+        </form>					
+    </div>				
+</div>
+</section>			
+<section id="footer-bar">
+<div class="row">
+<div class="span3">
+    <h4>Navegar</h4>
+    <ul class="nav">
+        <li><a href="./index.html">Inicio</a></li>  
+        <li><a href="./about.html">Sobre nosotros</a></li>
+        <li><a href="./contact.html">Contactanos</a></li>
+        <li><a href="./cart.html">Carrito</a></li>
+        <li><a href="./register.html">Inicio de sesion</a></li>							
+    </ul>					
+</div>
+<div class="span4">
+    <h4>Mi cuenta</h4>
+    <ul class="nav">
+        <li><a href="#">Mi cuenta</a></li>
+        <li><a href="#">Historial de pedidos</a></li>
+        <li><a href="#">Lista de deseos</a></li>
+        <li><a href="#">Novedades</a></li>
+    </ul>
+</div>
+<div class="span5">
+    <p class="logo"><img src="themes/images/logo.png" class="site_logo" alt=""></p>
+    <p>Shopper es la tienda online más completa para mascotas creada por pet lovers para pet lovers!. Somos la tienda en línea de mascotas con mayor variedad de productos y servicios a domicilio de Latinoamérica (Colombia, Chile y México), contamos con más de 4.000 productos (alimentos, dietas naturales, snacks, medicinas, higiene y accesorios) y próximamente, más de 17 servicios como (medicina veterinaria prepagada, veterinario a domicilio, vacunación, baños, funeraria, entrenador, cuidadores, información de colegios, fundaciones, entre otros.</p>
+    <br/>
+    <span class="social_icons">
+        <a class="facebook" href="#">Facebook</a>
+        <a class="twitter" href="#">Twitter</a>
+        <a class="skype" href="#">Skype</a>
+        <a class="vimeo" href="#">Vimeo</a>
+    </span>
+</div>					
+</div>
+</div>
+    <script src="js/validacion-formularios.js"></script>
+</body>
+</html>

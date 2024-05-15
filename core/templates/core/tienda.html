@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link href="{% static 'core/css/forms.css'%}" rel="stylesheet">
+    <link href="{% static 'core/css/estilos.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">     
+    {% if user.is_authenticated and user.is_staff %}
+        <h3 class="titulo">Aires Acondicionados a la Venta (Vista de Administrador)</h3>
+    {% endif %}
+    {% if user.is_authenticated and not user.is_staff and not user.perfilusuario.tipousu == 'Técnico'%}
+        <h3 class="titulo">Aires Acondicionados a la Venta (Vista de Cliente)</h3>
+    {% endif %}
+    {% if user.is_authenticated and user.perfilusuario.tipousu == 'Técnico' %}
+    <h3 class="titulo">Aires Acondicionados a la Venta (Vista de Técnico)</h3>
+{% endif %}
+    {% if not user.is_authenticated %}
+        <h3 class="titulo">Aires Acondicionados a la Venta (Vista de Usuario Anónimo)</h3>
+    {% endif %}
+        {% if datos_productos %}
+        {% for datos_producto in datos_productos %}
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+            <div style="border: 3px outset #000000;" class="card">
+                <img src="/media/{{ datos_producto.producto.imagen }}" class="card-imagen-top">
+                <div class="card-body">
+                    {% if datos_producto.cantidad_facturas > 0 %}
+                        <h6 class="card-title">PRODUCTO DISPONIBLE</h6>
+                    {% else %}
+                        <h6 class="card-title">AGOTADO</h6>
+                    {% endif %}
+                    <h6>${{ datos_producto.producto.precio }}</h6>
+                    <a href="{% url 'ficha' datos_producto.producto.idprod %}">
+                        <p class="card-text">{{ datos_producto.producto.nomprod }}</p>
+                    </a>
+                    <p>Descripción</p>
+                    <p>{{ datos_producto.producto.descprod }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+        {% endif %} 
+        
+    </div>
+</div>
+    <div class="tienda_link_home">
+        <a href="{% url 'home' %}" class="btn btn-dark btn-sm">Ir a la página de inicio</a>
+    </div>
+{% endblock content %}

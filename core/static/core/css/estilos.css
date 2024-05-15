@@ -1,0 +1,34 @@
+.card img{
+    height: 255px;
+}
+
+.row .card{
+    height: 455px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.titulo{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.titulo-dos{
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+.nav-item {
+    margin-right: 25px; 
+}
+
+.nav-item a{
+    font-weight: bold;
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.botones button{
+    margin-right: 15px;
+}
