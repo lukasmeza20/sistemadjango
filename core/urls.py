@@ -4,6 +4,8 @@ from django.contrib.auth import views as auth_views
 from .views import home, administrar_productos, tienda, ficha, solicitudes,solicitudes_servicio,compras, historial_ventas,admin_solicitudes,solicitudes_tecnico
 from .views import iniciar_sesion, registrar_usuario, cerrar_sesion
 from .views import perfil_usuario
+from .views import iniciar_pago
+from .views import pago_exitoso
 
 urlpatterns = [
     path('', home, name="home"),
@@ -16,6 +18,8 @@ urlpatterns = [
     path('tienda', tienda, name="tienda"),
     path('administrar_productos/<action>/<id>', administrar_productos, name="administrar_productos"),
     path('ficha/<id>', ficha, name="ficha"),
+    path('iniciar_pago/<id>', iniciar_pago, name="iniciar_pago"),
+    path('pago_exitoso/', pago_exitoso, name="pago_exitoso"),
     path('iniciar_sesion/', iniciar_sesion, name="iniciar_sesion"),
     path('cerrar_sesion/', cerrar_sesion, name='cerrar_sesion'),
     path('registrar_usuario/', registrar_usuario, name="registrar_usuario"),

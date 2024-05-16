@@ -85,6 +85,28 @@ def tienda(request):
     # Renderizar la plantilla con los datos
     return render(request, "core/tienda.html", data)
 
+
+
+#https://www.transbankdevelopers.cl/documentacion/como_empezar#como-empezar
+#https://www.transbankdevelopers.cl/documentacion/como_empezar#codigos-de-comercio
+#https://www.transbankdevelopers.cl/referencia/webpay
+
+# Tipo de tarjeta   Detalle                        Resultado
+#----------------   -----------------------------  ------------------------------
+# VISA              4051885600446623
+#                   CVV 123
+#                   cualquier fecha de expiración  Genera transacciones aprobadas.
+# AMEX              3700 0000 0002 032
+#                   CVV 1234
+#                   cualquier fecha de expiración  Genera transacciones aprobadas.
+# MASTERCARD        5186 0595 5959 0568
+#                   CVV 123
+#                   cualquier fecha de expiración  Genera transacciones rechazadas.
+# Redcompra         4051 8842 3993 7763            Genera transacciones aprobadas (para operaciones que permiten débito Redcompra y prepago)
+# Redcompra         4511 3466 6003 7060            Genera transacciones aprobadas (para operaciones que permiten débito Redcompra y prepago)
+# Redcompra         5186 0085 4123 3829            Genera transacciones rechazadas (para operaciones que permiten débito Redcompra y prepago)
+
+
 @csrf_exempt
 def ficha(request, id):
 
@@ -103,8 +125,9 @@ def ficha(request, id):
     # Si se tata de un CLIENTE REGISTRADO, se redirecciona a la vista "iniciar_pago"
     if request.method == "POST":
         if request.user.is_authenticated and not request.user.is_staff:
-            data["mesg"] = "¡Función no disponible hasta programar WEBPAY de TRANSBANK!"
-            #return redirect(iniciar_pago, id)
+            # data["mesg"] = "¡Función no disponible hasta programar WEBPAY de TRANSBANK!"
+            # iniciar_pago()
+            return redirect(iniciar_pago, id)
         else:
             # Si el usuario que hace la compra no ha iniciado sesión,
             # entonces se le envía un mensaje en la pagina para indicarle
@@ -128,6 +151,82 @@ def obtener_valor_usd():
     except:
         pass
     return 0
+
+@csrf_exempt
+def iniciar_pago(request, id):
+
+    # Esta es la implementacion de la VISTA iniciar_pago, que tiene la responsabilidad
+    # de iniciar el pago, por medio de WebPay. Lo primero que hace es seleccionar un 
+    # número de orden de compra, para poder así, identificar a la propia compra.
+    # Como esta tienda no maneja, en realidad no tiene el concepto de "orden de compra"
+    # pero se indica igual
+    print("Webpay Plus Transaction.create")
+    buy_order = str(random.randrange(1000000, 99999999))
+    session_id = request.user.username
+    amount = Producto.objects.get(idprod=id).precio
+    return_url = 'http://127.0.0.1:8000/pago_exitoso/'
+
+    # response = Transaction.create(buy_order, session_id, amount, return_url)
+    commercecode = "597055555532"
+    apikey = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
+
+    tx = Transaction(options=WebpayOptions(commerce_code=commercecode, api_key=apikey, integration_type="TEST"))
+    response = tx.create(buy_order, session_id, amount, return_url)
+    print(response['token'])
+
+    perfil = PerfilUsuario.objects.get(user=request.user)
+    form = PerfilUsuarioForm()
+
+    context = {
+        "buy_order": buy_order,
+        "session_id": session_id,
+        "amount": amount,
+        "return_url": return_url,
+        "response": response,
+        "token_ws": response['token'],
+        "url_tbk": response['url'],
+        "first_name": request.user.first_name,
+        "last_name": request.user.last_name,
+        "email": request.user.email,
+        "rut": perfil.rut,
+        "dirusu": perfil.dirusu,
+    }
+
+    return render(request, "core/iniciar_pago.html", context)
+
+@csrf_exempt
+def pago_exitoso(request):
+
+    if request.method == "GET":
+        token = request.GET.get("token_ws")
+        print("commit for token_ws: {}".format(token))
+        commercecode = "597055555532"
+        apikey = "579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C"
+        tx = Transaction(options=WebpayOptions(commerce_code=commercecode, api_key=apikey, integration_type="TEST"))
+        response = tx.commit(token=token)
+        print("response: {}".format(response))
+
+        user = User.objects.get(username=response['session_id'])
+        perfil = PerfilUsuario.objects.get(user=user)
+        form = PerfilUsuarioForm()
+
+        context = {
+            "buy_order": response['buy_order'],
+            "session_id": response['session_id'],
+            "amount": response['amount'],
+            "response": response,
+            "token_ws": token,
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "email": user.email,
+            "rut": perfil.rut,
+            "dirusu": perfil.dirusu,
+            "response_code": response['response_code']
+        }
+
+        return render(request, "core/pago_exitoso.html", context)
+    else:
+        return redirect(home)
 
 
 @csrf_exempt
