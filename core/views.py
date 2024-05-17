@@ -308,3 +308,40 @@ def perfil_usuario(request):
     data["form"] = form
     return render(request, "core/perfil_usuario.html", data)
 
+def obtener_solicitudes_de_servicio(request):
+
+    rut = PerfilUsuario.objects.get(user=request.user).rut
+    tipousu = PerfilUsuario.objects.get(user=request.user).tipousu
+
+    if request.method == 'GET':
+        cursor = connection.cursor()
+
+        # Ejecutar el procedimiento almacenado
+        if tipousu in ['Administrador', 'Superusuario'] :
+            cursor.execute(f"EXEC SP_OBTENER_SOLICITUDES_DE_SERVICIO 'Todos', ''")
+        elif tipousu in ['Cliente', 'Tecnico'] :
+            cursor.execute(f"EXEC SP_OBTENER_SOLICITUDES_DE_SERVICIO '{tipousu}', '{rut}'")
+        else:
+            data = {'lista': None, 'tipousu': 'Usuario No Permitido' }
+            return render(request, "core/obtener_solicitudes_de_servicio.html", data)
+
+        # Obtener los resultados
+        results = cursor.fetchall()
+
+        # Convertir los resultados en una lista de diccionarios
+        solicitudes_de_servicio = []
+        for row in results:
+            solicitudes_de_servicio.append({
+                'nrosol': row[0],
+                'nomcli': row[1],
+                'tiposol': row[2],
+                'fechavisita': row[3],
+                'hora': row[4],
+                'nomtec': row[5],
+                'descser': row[6],
+                'estadosol': row[7]
+            })
+
+        data = {'lista': solicitudes_de_servicio, 'tipousu': tipousu }
+
+        return render(request, "core/obtener_solicitudes_de_servicio.html", data)

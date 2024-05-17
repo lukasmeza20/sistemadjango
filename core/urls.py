@@ -6,6 +6,7 @@ from .views import iniciar_sesion, registrar_usuario, cerrar_sesion
 from .views import perfil_usuario
 from .views import iniciar_pago
 from .views import pago_exitoso
+from .views import obtener_solicitudes_de_servicio
 
 urlpatterns = [
     path('', home, name="home"),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('password_cambiada/', TemplateView.as_view(template_name='core/password_cambiada.html'), name='password_cambiada'),
     path('cambiar_password/', auth_views.PasswordChangeView.as_view(template_name='core/cambiar_password.html', success_url='/password_cambiada'), name='cambiar_password'),
     path('perfil_usuario/', perfil_usuario, name="perfil_usuario"),
+    path('obtener_solicitudes_de_servicio/', obtener_solicitudes_de_servicio, name="obtener_solicitudes_de_servicio"),
 ]

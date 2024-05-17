@@ -54,9 +54,6 @@
                         <li id="inicio" class="nav-item">
                            Inicio
                         </li>
-                        <!-- <li id="tienda" class="nav-item">
-                            Tienda
-                        </li> -->
                         {% comment %} Vista de Superusuario {% endcomment %}
                         {% if user.is_authenticated and user.is_superuser %}
                             <li id="admsis">Administrar sistema</li>
@@ -65,7 +62,7 @@
                         {% comment %} Vista de Administrador {% endcomment %}
                         {% if user.is_authenticated and user.is_staff %}
                         <li style="font-weight: bold; margin-right: 10px;" id=""><a href="{% url "historial_ventas" %}">Historial de ventas</a></li>
-                        <li style="font-weight: bold; margin-right: 10px;" id=""><a href=" {% url "admin_solicitudes" %} ">Solicitudes de Servicios</a></li>
+                        <li id="solser" style="font-weight: bold; margin-right: 10px;">Solicitudes de servicio</li>
                         <li id="perfil">Mis datos</li>
                         <!-- <li id="manpro">Mantener productos</li> -->
                         <li id="cerses">Cerrar sesión</li>
@@ -80,13 +77,13 @@
                         {% comment %} Vista cliente {% endcomment %}
                         {% if user.is_authenticated and not user.is_staff and not user.perfilusuario.tipousu == 'Técnico' %}
                             <li style="font-weight: bold; margin-right: 10px;"><a href="{% url 'compras' %}">Mis Compras</a></li>
-                            <li style="font-weight: bold; margin-right: 10px;"><a href="{% url 'solicitudes_servicio' %}">Mis Solicitudes</a></li>
+                            <li id="solser" style="font-weight: bold; margin-right: 10px;">Mis Solicitudes</li>
                             <li id="perfil">Mis datos</li>
                         <!-- <li id="chpass">Cambiar contraseña</li> -->
                         <li id="cerses">Cerrar sesión</li>
-                        {% elif user.is_authenticated and not user.is_staff%}
+                        {% elif user.is_authenticated and user.perfilusuario.tipousu == 'Técnico' %}
                         {# Vista de Técnico #}
-                            <li style="font-weight: bold; margin-right: 10px;"><a href="{% url 'solicitudes_tecnico' %}">Mis Solicitudes</a></li>
+                            <li id="solser" style="font-weight: bold; margin-right: 10px;">Mis Solicitudes</li>
                             <li id="perfil">Mis datos</li>
                             <li id="cerses">Cerrar sesión</li>
                         {% endif %}
@@ -135,6 +132,7 @@
             set_nav_li("#cerses", "{% url 'cerrar_sesion' %}", "{% static 'core/img/casco_abierto.png' %}");
             set_nav_li("#perfil", "{% url 'perfil_usuario' %}", "{% static 'core/img/perfil2.png' %}");
             set_nav_li("#chpass", "{% url 'cambiar_password' %}", "{% static 'core/img/password.png' %}");
+            set_nav_li("#solser", "{% url 'obtener_solicitudes_de_servicio' %}", "{% static 'core/img/guante.png' %}");
 
             function set_nav_li(id, url, img) {
                 $(id).addClass('nav-item list-inline-item align-center nav_item_text');

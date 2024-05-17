@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class PerfilUsuario(models.Model):
     TIPOUSU_CHOICES = [
         ('Cliente', 'Cliente'),
-        ('Técnico', 'Técnico'),
+        ('Tecnico', 'Tecnico'),
         ('Bodeguero', 'Bodeguero'),
         ('Administrador', 'Administrador'),
         ('Superusuario', 'Superusuario'),
