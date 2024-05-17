@@ -3,6 +3,21 @@
 
 {% block stylesheet %}
     <link href="{% static 'core/css/home.css'%}" rel="stylesheet">
+
+    <style>
+        .button-group {
+            display: flex;
+            justify-content: space-around; /* Distribuye los botones uniformemente */
+            gap: 10px; /* Espacio entre botones */
+            padding: 10px; /* Espacio interno para que los botones no estén pegados al borde */
+        }
+
+        .button-group .btn {
+            flex: 1; /* Para que los botones tengan el mismo ancho */
+        }
+    </style>
+
+
 {% endblock %}
 
 {% block content %}
@@ -20,6 +35,9 @@
                 <th>Técnico</th>
                 <th>Descripción</th>
                 <th>Estado SS</th>
+                {% if user.perfilusuario.tipousu == 'Tecnico' or user.perfilusuario.tipousu == 'Administrador'%}
+                <th>Opciones</th>
+                {% endif %}
             </theader>
             <tbody>
                 {% if lista %}
@@ -33,6 +51,13 @@
                             <td>{{ sol.nomtec }}</td>
                             <td>{{ sol.descser }}</td>
                             <td>{{ sol.estadosol }}</td>
+                            {% if user.perfilusuario.tipousu == 'Tecnico' or user.perfilusuario.tipousu == 'Administrador'%}
+                            <td class="button-group">
+                                <button type="button" class="btn btn-sm btn-success">Aceptar</button>
+                                <button type="button" class="btn btn-sm btn-primary">Modificar</button>
+                                <button type="button" class="btn btn-sm btn-danger">Cerrar</button>
+                            </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 {% endif %}

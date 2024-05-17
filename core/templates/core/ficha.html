@@ -38,16 +38,15 @@
                     </span> {% endcomment %}
                 </h4><br>
                 <h4>{{ producto.nomprod }}<br><br></h4>
-                <h4>Descripción: {{ producto.descprod }}</h4><br>        
-                <form method="POST">
-                    <input type="submit" class="btn btn-primary" value="Comprar">
-                    {% if mesg %}
-                        <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
-                    {% endif %}
-                </form><br>
-                <div style="margin-right: 15px;" class="alert alert-danger" role="alert">
-                    <h4>Lo sentimos, no fue posible generar el pago, vuelva a intentar la compra más tarde!</h4>
-                </div>
+                <h4>Descripción: {{ producto.descprod }}</h4><br>  
+                {% if user.is_authenticated and user.perfilusuario.tipousu == 'Cliente' or not user.perfilusuario.tipousu %}    
+                    <form method="POST">
+                        <input type="submit" class="btn btn-primary" value="Comprar">
+                        {% if mesg %}
+                            <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
+                        {% endif %}
+                    </form><br>
+                {% endif %}  
             </div>
         </div>
     </div>

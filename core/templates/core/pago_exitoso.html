@@ -7,7 +7,9 @@
 
 {% block content %}
     {% if response_code == 0 %}
-        <h1>¡El Pago fue Realizado con Exito!</h1>
+        <div style="margin-right: 15px; margin-top:15px;" class="alert alert-success" role="alert">
+            <h4>Felicidades ¡El Pago fue Realizado con Exito!</h4>
+        </div> 
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-6 borde_formulario text-center">
@@ -25,6 +27,8 @@
             </div>
         </div>
     {% else %}
-        <h1>¡El Pago no Pudo ser Realizado con Exito!<br>Por Favor Intente Nuevamente Más Tarde...</h1>
+     <div style="margin-right: 15px; margin-top:15px;" class="alert alert-danger" role="alert">
+            <h4>Lo sentimos, no fue posible generar el pago, vuelva a intentar la compra más tarde!</h4>
+     </div>
     {% endif %}
 {% endblock content %}

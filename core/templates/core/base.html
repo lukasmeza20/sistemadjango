@@ -40,7 +40,10 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a style="font-weight: bold;" class="navbar-brand" href="#">Buenos Aires <a id="tienda">Ir a Tienda</a></a>
+            <a style="font-weight: bold;" class="navbar-brand" href="{% url 'home' %}">Buenos Aires <a id="tienda">Ir a Tienda</a></a>
+            {% if user.is_authenticated %}
+                <a style="font-weight: bold; color:red;" class="navbar-brand">Usuario: {{user.first_name}} {{user.last_name}}<a id="tienda"></a></a>
+            {% endif %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <!-- <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
@@ -75,21 +78,19 @@
                         {% endif %}
 
                         {% comment %} Vista cliente {% endcomment %}
-                        {% if user.is_authenticated and not user.is_staff and not user.perfilusuario.tipousu == 'Técnico' %}
+                        {% if user.is_authenticated and not user.is_staff and not user.perfilusuario.tipousu == 'Tecnico' %}
                             <li style="font-weight: bold; margin-right: 10px;"><a href="{% url 'compras' %}">Mis Compras</a></li>
                             <li id="solser" style="font-weight: bold; margin-right: 10px;">Mis Solicitudes</li>
                             <li id="perfil">Mis datos</li>
                         <!-- <li id="chpass">Cambiar contraseña</li> -->
                         <li id="cerses">Cerrar sesión</li>
-                        {% elif user.is_authenticated and user.perfilusuario.tipousu == 'Técnico' %}
+                        {% elif user.is_authenticated and user.perfilusuario.tipousu == 'Tecnico' %}
                         {# Vista de Técnico #}
                             <li id="solser" style="font-weight: bold; margin-right: 10px;">Mis Solicitudes</li>
                             <li id="perfil">Mis datos</li>
                             <li id="cerses">Cerrar sesión</li>
                         {% endif %}
-                       
-
-                    
+ 
                     </ul>
             </form>
           </div>
