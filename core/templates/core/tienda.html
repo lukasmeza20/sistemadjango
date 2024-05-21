@@ -23,23 +23,31 @@
     {% if not user.is_authenticated %}
         <h3 class="titulo">Aires Acondicionados a la Venta (Vista de Usuario Anónimo)</h3>
     {% endif %}
-        {% if datos_productos %}
-        {% for datos_producto in datos_productos %}
+
+
+    {% comment %} {% for producto in datos_productos %}
+    <div class="producto">
+        <h2>{{ producto.nomprod }}</h2>
+        <p>Precio: {{ producto.precio }}</p>
+        <p>Descripción: {{ producto.descprod }}</p>
+        <p>Estado: {{ producto.estado }}</p>
+        <img src="/media/{{ producto.imagen }}" class="card-imagen-top">
+        <div class="card-body">
+    </div>
+{% endfor %} {% endcomment %}
+     {% if datos_productos %}
+        {% for producto in datos_productos %}
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
             <div style="border: 3px outset #000000;" class="card">
-                <img src="/media/{{ datos_producto.producto.imagen }}" class="card-imagen-top">
-                <div class="card-body">
-                    {% if datos_producto.cantidad_facturas > 0 %}
-                        <h6 class="card-title">PRODUCTO DISPONIBLE</h6>
-                    {% else %}
-                        <h6 class="card-title">AGOTADO</h6>
-                    {% endif %}
-                    <h6>${{ datos_producto.producto.precio }}</h6>
-                    <a href="{% url 'ficha' datos_producto.producto.idprod %}">
-                        <p class="card-text">{{ datos_producto.producto.nomprod }}</p>
+                <img src="/media/{{ producto.imagen }}" class="card-imagen-top">
+                <div class="card-body">  
+                        <h5 class="card-title">PRODUCTO DISPONIBLE</h5>
+                    <h6>${{ producto.precio }}</h6>
+                    <a href="{% url 'ficha' producto.idprod %}">
+                        <p class="card-text">{{ producto.nomprod }}</p>
                     </a>
-                    <p>Descripción</p>
-                    <p>{{ datos_producto.producto.descprod }}</p>
+                    <p class="card-text">{{ producto.descprod }}</p>
+                    <h6 style="color: red;" class="card-text">Stock disponible: {{ producto.stock_producto }}</h6>
                 </div>
             </div>
         </div>

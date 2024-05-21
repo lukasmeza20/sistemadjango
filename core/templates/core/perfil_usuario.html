@@ -50,59 +50,7 @@
 {% block content %}
     <div class="container">
         <h3 style="color: black !important;margin-top: 20px; margin-bottom: 20px;">Mis datos (Vista de Cualquier Usuario Conectado)</h3>
-        <!-- <div class="content container text-center"> -->
-            <form style="border: 1px solid gray; padding: 10px;">
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">RUT</label>
-                    <div class="col-auto">
-                        <input type="text" class="form-control" id="inputPassword">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Nombres</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Apellidos</label>
-                    <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Correo</label>
-                    <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputPassword">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Dirección</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Contraseña</label>
-                    <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Repetir Contraseña</label>
-                    <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
-                    </div>
-                </div>
-                <div class="alert alert-success" role="alert">
-                    <h4>Datos actualizados correctamente</h4>
-                  </div>
-                <div style="display: flex; justify-content: center;" class="botones">
-                    <button style="margin-right: 15px;" type="button" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-secondary">Limpiar</button>
-                </div>
-            </form>
-            {% comment %} <form id="misdatos" method="POST" class="col-sm-12 col-md-6">
+           <form id="misdatos" method="POST" class="col-sm-12 col-md-6">
                 {% csrf_token %} {{ form.as_p }}
                 <div class="btn_guardar">
                     <button class="btn btn-primary" type="submit">Actualizar datos de perfil</button>
@@ -110,7 +58,6 @@
                 {% if mesg %}
                 <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
                 {% endif %}
-            </form> {% endcomment %}
-        <!-- </div> -->
+            </form> 
     </div>
 {% endblock content %}

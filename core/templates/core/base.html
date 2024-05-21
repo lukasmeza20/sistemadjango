@@ -42,7 +42,7 @@
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <a style="font-weight: bold;" class="navbar-brand" href="{% url 'home' %}">Buenos Aires <a id="tienda">Ir a Tienda</a></a>
             {% if user.is_authenticated %}
-                <a style="font-weight: bold; color:red;" class="navbar-brand">Usuario: {{user.first_name}} {{user.last_name}}<a id="tienda"></a></a>
+                <a style="font-weight: bold; color:red;" class="navbar-brand">Usuario: {{user.first_name}} {{user.last_name}} ({{user.perfilusuario.tipousu}}) <a id="tienda"></a></a>
             {% endif %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <!-- <li class="nav-item">
@@ -64,7 +64,7 @@
                 
                         {% comment %} Vista de Administrador {% endcomment %}
                         {% if user.is_authenticated and user.is_staff %}
-                        <li style="font-weight: bold; margin-right: 10px;" id=""><a href="{% url "historial_ventas" %}">Historial de ventas</a></li>
+                        <li id="obtfac" style="font-weight: bold; margin-right: 10px;">Historial de ventas</li>
                         <li id="solser" style="font-weight: bold; margin-right: 10px;">Solicitudes de servicio</li>
                         <li id="perfil">Mis datos</li>
                         <!-- <li id="manpro">Mantener productos</li> -->
@@ -79,7 +79,7 @@
 
                         {% comment %} Vista cliente {% endcomment %}
                         {% if user.is_authenticated and not user.is_staff and not user.perfilusuario.tipousu == 'Tecnico' %}
-                            <li style="font-weight: bold; margin-right: 10px;"><a href="{% url 'compras' %}">Mis Compras</a></li>
+                            <li id="obtfac" style="font-weight: bold; margin-right: 10px;">Mis Compras</li>
                             <li id="solser" style="font-weight: bold; margin-right: 10px;">Mis Solicitudes</li>
                             <li id="perfil">Mis datos</li>
                         <!-- <li id="chpass">Cambiar contraseña</li> -->
@@ -134,6 +134,7 @@
             set_nav_li("#perfil", "{% url 'perfil_usuario' %}", "{% static 'core/img/perfil2.png' %}");
             set_nav_li("#chpass", "{% url 'cambiar_password' %}", "{% static 'core/img/password.png' %}");
             set_nav_li("#solser", "{% url 'obtener_solicitudes_de_servicio' %}", "{% static 'core/img/guante.png' %}");
+            set_nav_li("#obtfac", "{% url 'compras' %}", "{% static 'core/img/guante.png' %}");
 
             function set_nav_li(id, url, img) {
                 $(id).addClass('nav-item list-inline-item align-center nav_item_text');

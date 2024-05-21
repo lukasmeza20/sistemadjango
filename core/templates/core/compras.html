@@ -6,48 +6,39 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">     
-        <h3 class="titulo">Mis Compras (Vista del Cliente)</h3>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Nro Fac</th>
-                      <th>Cliente</th>
-                      <th>Fecha</th>
-                      <th>Descripción</th>
-                      <th>Monto</th>
-                      <th>Nro GD</th>
-                      <th>Estado GD</th>
-                      <th>NRO SS</th>
-                      <th>Estado SS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Ana Torres</td>
-                      <td>2024-04-08</td>
-                      <td>Aire wifi 9000 btu</td>
-                      <td>$25.000</td>
-                      <td>GD-001</td>
-                      <td>Entregado</td>
-                      <td>SS-001</td>
-                      <td>Cerrada</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Ana Torres</td>
-                      <td>2024-04-08</td>
-                      <td>Mantención</td>
-                      <td>$25.000</td>
-                      <td>No Aplica</td>
-                      <td>No Aplica</td>
-                      <td>SS-002</td>
-                      <td>Cerrada</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-        </div>
+<div class="text-center">
+  <h1 style="color: blue !important; font-weight: bolder;">
+      {% comment %} Mis Solicitudes de Servicio <br> (Vista de {{ tipousu }}) {% endcomment %}
+  </h1>
+  <table class="table table-hover">
+      <theader>
+          <th>Nro Fac</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Descripción</th>
+          <th>Monto</th>
+          <th>Nro GD</th>
+          <th>Estado GD</th>
+          <th>NRO SS</th>
+          <th>Estado SS</th>
+      </theader>
+      <tbody>
+        {% if list %}
+          {% for fac in list %}
+              <tr>
+                  <td>{{ fac.nrofac }}</td>
+                  <td>{{ fac.nomcli }}</td>
+                  <td>{{ fac.fechafac }}</td>
+                  <td>{{ fac.descfac }}</td>
+                  <td>{{ fac.monto }}</td>
+                  <td>{{ fac.nrogd }}</td>
+                  <td>{{ fac.estadogd }}</td>
+                  <td>{{ fac.nrosol }}</td>
+                  <td>{{ fac.estadosol }}</td>
+              </tr>
+        {% endfor %}
+      {% endif %}
+      </tbody>
+  </table>
+
 {% endblock content %}

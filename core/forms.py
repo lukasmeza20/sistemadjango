@@ -10,8 +10,8 @@ class ProductoForm(ModelForm):
         fields = ['idprod', 'nomprod', 'descprod', 'precio', 'imagen']
 
 class IniciarSesionForm(Form):
-    username = forms.CharField(widget=forms.TextInput(), label="Correo")
-    password = forms.CharField(widget=forms.PasswordInput(), label="Contraseña")
+    username = forms.CharField(label="Correo", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     class Meta:
         fields = ['username', 'password']
 
@@ -24,12 +24,27 @@ class RegistrarUsuarioForm(UserCreationForm):
         fields = ['username', 'first_name', 'last_name', 'email', 'tipousu', 'rut', 'dirusu']
 
 class PerfilUsuarioForm(Form):
-    first_name = forms.CharField(max_length=150, required=True, label="Nombres")
-    last_name = forms.CharField(max_length=150, required=True, label="Apellidos")
-    email = forms.CharField(max_length=254, required=True, label="Correo")
-    rut = forms.CharField(max_length=20, required=False, label="Rut")
-    tipousu = forms.CharField(max_length=50, required=True, label="Tipo de usuario")
-    dirusu = forms.CharField(max_length=300, required=False, label="Dirección")
+    rut = forms.CharField(max_length=20, required=False, label="Rut", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(max_length=150, required=True, label="Nombres", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(max_length=150, required=True, label="Apellidos", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.CharField(max_length=254, required=True, label="Correo", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    dirusu = forms.CharField(max_length=300, required=False, label="Dirección", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    tipousu = forms.CharField(max_length=50, required=True, label="Tipo de usuario", widget=forms.TextInput(attrs={'class': 'form-control'}))
+    
+
+    class Meta:
+        fields = '__all__'
+
+
+
+class IngresarSolicitudServicioForm(Form):
+    monto = forms.CharField(max_length=20, required=False, label="Rut")
+    tiposol = forms.CharField(max_length=150, required=True, label="Nombres")
+    descsol = forms.CharField(max_length=150, required=True, label="Apellidos")
+    fechavisita = forms.CharField(max_length=254, required=True, label="Correo")
+    horavisita = forms.CharField(max_length=300, required=False, label="Dirección")
+
+    
 
     class Meta:
         fields = '__all__'

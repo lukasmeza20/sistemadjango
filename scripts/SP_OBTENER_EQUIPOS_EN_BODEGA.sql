@@ -11,8 +11,8 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
-    SELECT
-		s.idstock, p.idprod, p.nomprod, f.nrofac, 
+   SELECT
+		s.idstock, p.idprod, p.nomprod, f.nrofac, p.precio,p.descprod,p.imagen,
 		CASE 
 			WHEN f.nrofac IS NOT NULL 
 			THEN 'Vendido'

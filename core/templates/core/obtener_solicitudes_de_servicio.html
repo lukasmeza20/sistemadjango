@@ -63,5 +63,9 @@
                 {% endif %}
             </tbody>
         </table>
+        {% if user.perfilusuario.tipousu == 'Cliente' %}
+        
+            <button type="submit" class="btn btn-primary"><a style="text-decoration: none; color: white;" href="{% url 'solicitudes' %}">Ingresar nueva solicitud de servicio</a></button>
+        {% endif %}
     </div>
 {% endblock content %}

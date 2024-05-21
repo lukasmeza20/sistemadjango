@@ -62,29 +62,30 @@ def cerrar_sesion(request):
     return redirect(home)
 
 def tienda(request):
-     # Obtener todos los productos ordenados por su ID
-    productos = Producto.objects.all().order_by('idprod')
-    
-    # Crear una lista para almacenar los datos de cada producto junto con su cantidad de facturas
     datos_productos = []
+
+    with connection.cursor() as cursor:
+        cursor.execute("EXEC SP_OBTENER_EQUIPOS_EN_BODEGA")
+        columnas = [col[0] for col in cursor.description]
+        productos = [dict(zip(columnas, row)) for row in cursor.fetchall()]
     
-    # Iterar sobre cada producto para obtener la cantidad de facturas asociadas
     for producto in productos:
-        cantidad_facturas = Factura.objects.filter(idprod=producto.idprod).count()
         datos_producto = {
-            'producto': producto,
-            'cantidad_facturas': cantidad_facturas,
+            'stock_producto': producto['stock_producto'],
+            'idprod': producto['idprod'],
+            'nomprod': producto['nomprod'],
+            'nrofac': producto.get('nrofac', None),
+            'precio': producto['precio'],
+            'descprod': producto['descprod'],
+            'imagen': producto['imagen'],
         }
         datos_productos.append(datos_producto)
-    
-    # Crear el diccionario de datos para pasar a la plantilla
+
     data = {
         'datos_productos': datos_productos,
     }
-    
-    # Renderizar la plantilla con los datos
-    return render(request, "core/tienda.html", data)
 
+    return render(request, "core/tienda.html", data)
 
 
 #https://www.transbankdevelopers.cl/documentacion/como_empezar#como-empezar
@@ -303,16 +304,52 @@ def perfil_usuario(request):
     form.fields['last_name'].initial = request.user.last_name
     form.fields['email'].initial = request.user.email
     form.fields['rut'].initial = perfil.rut
+    if(perfil.tipousu == 'Cliente' or perfil.tipousu == 'Tecnico' or perfil.tipousu == 'Vendedor'):
+        form.fields['tipousu'].initial = perfil.tipousu
+        form.fields['tipousu'].disabled = True
     form.fields['tipousu'].initial = perfil.tipousu
     form.fields['dirusu'].initial = perfil.dirusu
     data["form"] = form
     return render(request, "core/perfil_usuario.html", data)
 
+
+def obtener_facturas(request):
+    rut = PerfilUsuario.objects.get(user=request.user).rut
+    tipousu = PerfilUsuario.objects.get(user=request.user).tipousu
+        
+    if request.method == 'GET':
+        with connection.cursor() as cursor:
+            if tipousu in ['Administrador', 'Superusuario'] :
+                cursor.execute(f"EXEC SP_OBTENER_FACTURAS 'NULL'")
+            elif tipousu in ['Cliente'] :
+                cursor.execute(f"EXEC SP_OBTENER_FACTURAS '{rut}'")
+            else:
+                data = {'list': None, 'tipousu': 'Usuario No Permitido' }
+                return render(request, "core/compras.html", data)
+            results = cursor.fetchall()
+            facturas = []
+        for row in results:
+            facturas.append({
+                'nrofac': row[0],
+                'nomcli': row[1],
+                'fechafac': row[2],
+                'descfac': row[3],
+                'monto': row[4],
+                'nrogd': row[5],
+                'estadogd': row[6],
+                'nrosol': row[7],
+                'estadosol':row[8]
+            })
+        data = {'list': facturas, 'tipousu': tipousu }
+        return render(request, "core/compras.html", data)
+
+
+
 def obtener_solicitudes_de_servicio(request):
 
     rut = PerfilUsuario.objects.get(user=request.user).rut
     tipousu = PerfilUsuario.objects.get(user=request.user).tipousu
-
+ 
     if request.method == 'GET':
         cursor = connection.cursor()
 
