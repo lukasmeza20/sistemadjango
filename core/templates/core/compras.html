@@ -11,17 +11,19 @@
       {% comment %} Mis Solicitudes de Servicio <br> (Vista de {{ tipousu }}) {% endcomment %}
   </h1>
   <table class="table table-hover">
-      <theader>
-          <th>Nro Fac</th>
-          <th>Cliente</th>
-          <th>Fecha</th>
-          <th>Descripción</th>
-          <th>Monto</th>
-          <th>Nro GD</th>
-          <th>Estado GD</th>
-          <th>NRO SS</th>
-          <th>Estado SS</th>
-      </theader>
+      <thead>
+          <tr>
+              <th>Nro Fac</th>
+              <th>Cliente</th>
+              <th>Fecha</th>
+              <th>Descripción</th>
+              <th>Monto</th>
+              <th>Nro GD</th>
+              <th>Estado GD</th>
+              <th>NRO SS</th>
+              <th>Estado SS</th>
+          </tr>
+      </thead>
       <tbody>
         {% if list %}
           {% for fac in list %}
@@ -36,9 +38,12 @@
                   <td>{{ fac.nrosol }}</td>
                   <td>{{ fac.estadosol }}</td>
               </tr>
-        {% endfor %}
-      {% endif %}
+          {% endfor %}
+        {% else %}
+          <tr>
+              <td colspan="9">No se encontraron facturas.</td>
+          </tr>
+        {% endif %}
       </tbody>
   </table>
-
 {% endblock content %}

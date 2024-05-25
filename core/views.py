@@ -65,19 +65,19 @@ def tienda(request):
     datos_productos = []
 
     with connection.cursor() as cursor:
-        cursor.execute("EXEC SP_OBTENER_EQUIPOS_EN_BODEGA")
+        cursor.execute("EXEC SP_OBTENER_STOCK ")
         columnas = [col[0] for col in cursor.description]
         productos = [dict(zip(columnas, row)) for row in cursor.fetchall()]
     
     for producto in productos:
         datos_producto = {
-            'stock_producto': producto['stock_producto'],
             'idprod': producto['idprod'],
             'nomprod': producto['nomprod'],
-            'nrofac': producto.get('nrofac', None),
-            'precio': producto['precio'],
             'descprod': producto['descprod'],
+            'precio': producto['precio'],
             'imagen': producto['imagen'],
+            'cantidad': producto['cantidad'],
+            'disponibilidad': producto['disponibilidad'],
         }
         datos_productos.append(datos_producto)
 
@@ -314,41 +314,60 @@ def perfil_usuario(request):
 
 
 def obtener_facturas(request):
-    rut = PerfilUsuario.objects.get(user=request.user).rut
-    tipousu = PerfilUsuario.objects.get(user=request.user).tipousu
-        
-    if request.method == 'GET':
-        with connection.cursor() as cursor:
-            if tipousu in ['Administrador', 'Superusuario'] :
-                cursor.execute(f"EXEC SP_OBTENER_FACTURAS 'NULL'")
-            elif tipousu in ['Cliente'] :
-                cursor.execute(f"EXEC SP_OBTENER_FACTURAS '{rut}'")
-            else:
-                data = {'list': None, 'tipousu': 'Usuario No Permitido' }
-                return render(request, "core/compras.html", data)
-            results = cursor.fetchall()
-            facturas = []
-        for row in results:
-            facturas.append({
-                'nrofac': row[0],
-                'nomcli': row[1],
-                'fechafac': row[2],
-                'descfac': row[3],
-                'monto': row[4],
-                'nrogd': row[5],
-                'estadogd': row[6],
-                'nrosol': row[7],
-                'estadosol':row[8]
-            })
-        data = {'list': facturas, 'tipousu': tipousu }
+    try:
+        perfil = PerfilUsuario.objects.get(user=request.user)
+        rut = perfil.rut
+        tipousu = perfil.tipousu
+
+        print(f'Usuario: {request.user}, RUT: {rut}, Tipo de Usuario: {tipousu}')  # Depuración
+
+        if request.method == 'GET':
+            with connection.cursor() as cursor:
+                if tipousu in ['Administrador', 'Superusuario']:
+                    cursor.execute("EXEC SP_OBTENER_FACTURAS %s", [None])
+                elif tipousu in ['Cliente']:
+                    cursor.execute("EXEC SP_OBTENER_FACTURAS %s", [rut])
+                else:
+                    data = {'list': None, 'tipousu': 'Usuario No Permitido'}
+                    return render(request, "core/compras.html", data)
+                
+                results = cursor.fetchall()
+                print(f'Resultados crudos: {results}')  # Depuración
+
+                if not results:
+                    print("No se encontraron resultados.")  # Depuración
+                    data = {'list': [], 'tipousu': tipousu}
+                    return render(request, "core/compras.html", data)
+
+                facturas = []
+                for row in results:
+                    print(f'Fila: {row}')  # Depuración
+                    facturas.append({
+                        'nrofac': row[0],
+                        'nomcli': row[1],
+                        'fechafac': row[2],
+                        'descfac': row[3],
+                        'monto': row[4],
+                        'nrogd': row[5],
+                        'estadogd': row[6],
+                        'nrosol': row[7],
+                        'estadosol': row[8]
+                    })
+
+            data = {'list': facturas, 'tipousu': tipousu}
+            return render(request, "core/compras.html", data)
+    except PerfilUsuario.DoesNotExist:
+        data = {'list': None, 'tipousu': 'Usuario No Encontrado'}
         return render(request, "core/compras.html", data)
-
-
+    except Exception as e:
+        data = {'list': None, 'tipousu': f'Error: {str(e)}'}
+        return render(request, "core/compras.html", data)
 
 def obtener_solicitudes_de_servicio(request):
 
     rut = PerfilUsuario.objects.get(user=request.user).rut
     tipousu = PerfilUsuario.objects.get(user=request.user).tipousu
+    print(f'Usuario: {request.user}, RUT: {rut}, Tipo de Usuario: {tipousu}')  # Depuración
  
     if request.method == 'GET':
         cursor = connection.cursor()

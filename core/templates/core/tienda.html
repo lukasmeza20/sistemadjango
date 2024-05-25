@@ -41,13 +41,13 @@
             <div style="border: 3px outset #000000;" class="card">
                 <img src="/media/{{ producto.imagen }}" class="card-imagen-top">
                 <div class="card-body">  
-                        <h5 class="card-title">PRODUCTO DISPONIBLE</h5>
+                        <h5 class="card-title"> {{producto.disponibilidad}} </h5>
                     <h6>${{ producto.precio }}</h6>
                     <a href="{% url 'ficha' producto.idprod %}">
                         <p class="card-text">{{ producto.nomprod }}</p>
                     </a>
                     <p class="card-text">{{ producto.descprod }}</p>
-                    <h6 style="color: red;" class="card-text">Stock disponible: {{ producto.stock_producto }}</h6>
+                    <h6 style="color: red;" class="card-text">Stock disponible: {{ producto.cantidad }}</h6>
                 </div>
             </div>
         </div>

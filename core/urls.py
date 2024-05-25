@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic.base import TemplateView
 from django.contrib.auth import views as auth_views
-from .views import home, administrar_productos, tienda, ficha, solicitudes,solicitudes_servicio,compras, historial_ventas,admin_solicitudes,solicitudes_tecnico
+from .views import home, administrar_productos, obtener_facturas, tienda, ficha, solicitudes,solicitudes_servicio, historial_ventas,admin_solicitudes,solicitudes_tecnico
 from .views import iniciar_sesion, registrar_usuario, cerrar_sesion
 from .views import perfil_usuario
 from .views import iniciar_pago
@@ -12,7 +12,7 @@ urlpatterns = [
     path('', home, name="home"),
     path('solicitudes', solicitudes, name="solicitudes"),
     path('solicitudes_servicio', solicitudes_servicio, name="solicitudes_servicio"),
-    path('historial/', compras, name="compras"),
+    path('historial/', obtener_facturas, name="compras"),
     path('historial_ventas', historial_ventas, name="historial_ventas"),
     path('admin_solicitudes', admin_solicitudes, name="admin_solicitudes"),
     path('solicitudes_tecnico', solicitudes_tecnico, name="solicitudes_tecnico"),
