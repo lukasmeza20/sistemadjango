@@ -23,7 +23,7 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
-    path('api/', include('apirest.urls')),
+    path('BuenosAiresApiRest/', include('apirest.urls')),
 ]
 
 if settings.DEBUG:
