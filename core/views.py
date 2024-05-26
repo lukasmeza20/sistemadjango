@@ -1,3 +1,5 @@
+import datetime
+from datetime import datetime, date, time
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
@@ -5,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Producto, PerfilUsuario, Factura
 from .forms import ProductoForm, IniciarSesionForm
 from .forms import RegistrarUsuarioForm, PerfilUsuarioForm
+from .forms import IngresarSolicitudServicioForm
 #from .error.transbank_error import TransbankError
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from django.db import connection
@@ -15,7 +18,33 @@ def home(request):
     return render(request, "core/home.html")
 
 def solicitudes(request):
-    return render(request, "core/solicitudes.html")
+    data = {"mesg": "", "form": IngresarSolicitudServicioForm()}
+    perfil = PerfilUsuario.objects.get(user=request.user)
+    rut = perfil.rut
+
+    if request.method == 'POST':
+        form = IngresarSolicitudServicioForm(request.POST)
+        if form.is_valid():
+            descfac = 'Aire Wifi 9000 btu'
+            rutcli = rut
+            tiposol = form.cleaned_data.get('tiposol')
+            fechavisita_date = form.cleaned_data.get('fechavisita')
+            horavisita_time = form.cleaned_data.get('horavisita')
+            fechavisita = datetime.combine(fechavisita_date, horavisita_time)
+            descsol = form.cleaned_data.get('descsol')
+            idprod = 1
+            monto = form.cleaned_data.get('monto')
+
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    EXEC SP_CREAR_SOLICITUD_SERVICIO 
+                    @descfac=%s, @rutcli=%s, @tiposol=%s, 
+                    @fechavisita=%s, @descsol=%s, @idprod=%s, @monto=%s
+                """, [descfac, rutcli, tiposol, fechavisita, descsol, idprod, monto])
+
+            data["mesg"] = "¡La solicitud fue registrada correctamente!"
+
+    return render(request, "core/solicitudes.html", data)
 
 def solicitudes_servicio(request):
     return render(request, "core/solicitudes_servicio.html")
@@ -112,35 +141,56 @@ def tienda(request):
 def ficha(request, id):
 
     dolar = obtener_valor_usd()
-    prod = Producto.objects.get(idprod = id)
-    precio_convertido = prod.precio * dolar 
+    prod = Producto.objects.get(idprod=id)
+    precio_convertido = prod.precio * dolar
 
     cantidad_facturas = Factura.objects.filter(idprod=id).count()
-    data = {"mesg": "", "producto": None,"precio_convertido":precio_convertido ,"cantidad_facturas":cantidad_facturas}
+    data = {"mesg": "", "producto": None, "precio_convertido": precio_convertido, "cantidad_facturas": cantidad_facturas}
 
-    # Cuando el usuario hace clic en el boton COMPRAR, se ejecuta el METODO POST del
-    # formulario de ficha.html, con lo cual se redirecciona la página para que
-    # llegue a esta VISTA llamada "FICHA". A continuacion se verifica que sea un POST 
-    # y se valida que se trate de un usuario autenticado que no sea de estaff, 
-    # es decir, se comprueba que la compra sea realizada por un CLIENTE REGISTRADO.
-    # Si se tata de un CLIENTE REGISTRADO, se redirecciona a la vista "iniciar_pago"
     if request.method == "POST":
         if request.user.is_authenticated and not request.user.is_staff:
-            # data["mesg"] = "¡Función no disponible hasta programar WEBPAY de TRANSBANK!"
-            # iniciar_pago()
             return redirect(iniciar_pago, id)
         else:
-            # Si el usuario que hace la compra no ha iniciado sesión,
-            # entonces se le envía un mensaje en la pagina para indicarle
-            # que primero debe iniciar sesion antes de comprar
             data["mesg"] = "¡Para poder comprar debe iniciar sesión como cliente!"
 
-    # Si visitamos la URL de FICHA y la pagina no nos envia un METODO POST, 
-    # quiere decir que solo debemos fabricar la pagina y devolvera al browser
-    # para que se muestren los datos de la FICHA
-    data["producto"] = Producto.objects.get(idprod=id)
-    return render(request, "core/ficha.html", data )
+    # Ejecutar la consulta SQL para obtener el stock y la disponibilidad
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT 
+                m.idprod,
+                m.nomprod,
+                m.descprod,
+                m.precio, 
+                m.imagen, 
+                COUNT(b.idprod) AS cantidad, 
+                CASE 
+                    WHEN COUNT(b.idprod) = 0 
+                    THEN 'AGOTADO' 
+                    ELSE 'PRODUCTO DISPONIBLE' 
+                END AS disponibilidad
+            FROM
+                Producto m
+                LEFT JOIN (SELECT * FROM StockProducto WHERE nrofac IS NULL) b ON m.idprod = b.idprod
+            WHERE 
+                m.idprod = %s
+            GROUP BY
+                m.idprod,
+                m.nomprod,
+                m.descprod,
+                m.precio,
+                m.imagen
+            ORDER BY 
+                m.idprod;
+        """, [id])
+        
+        columnas = [col[0].lower() for col in cursor.description]  # Convertimos los nombres de columnas a minúsculas
+        productos = [dict(zip(columnas, row)) for row in cursor.fetchall()]
+    
+    # Asignar el producto obtenido al diccionario `data`
+    if productos:
+        data["producto"] = productos[0]
 
+    return render(request, "core/ficha.html", data)
 def obtener_valor_usd():
     url = 'https://api.exchangerate-api.com/v4/latest/CLP'
     try:

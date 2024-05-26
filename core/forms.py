@@ -35,16 +35,16 @@ class PerfilUsuarioForm(Form):
     class Meta:
         fields = '__all__'
 
-
-
 class IngresarSolicitudServicioForm(Form):
-    monto = forms.CharField(max_length=20, required=False, label="Rut")
-    tiposol = forms.CharField(max_length=150, required=True, label="Nombres")
-    descsol = forms.CharField(max_length=150, required=True, label="Apellidos")
-    fechavisita = forms.CharField(max_length=254, required=True, label="Correo")
-    horavisita = forms.CharField(max_length=300, required=False, label="Dirección")
-
+    TIPO_SOLICITUD_CHOICES = [
+        ('Mantención', 'Mantención'),
+        ('Reparación', 'Reparación'),
+    ]
+    monto = forms.IntegerField(required=False,label="Precio de la visita",initial=25000,widget=forms.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly'}))
+    tiposol = forms.ChoiceField(choices=TIPO_SOLICITUD_CHOICES,required=True,label="Tipo de solicitud",widget=forms.Select(attrs={'class': 'form-control'}))
+    descsol = forms.CharField(max_length=100,required=True,label="Descripción",widget=forms.Textarea(attrs={'class': 'form-control'}))
+    fechavisita = forms.DateField(required=True,label="Fecha de la visita",widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}))
+    horavisita = forms.TimeField(required=False,label="Hora de la visita",widget=forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}))
     
-
     class Meta:
         fields = '__all__'

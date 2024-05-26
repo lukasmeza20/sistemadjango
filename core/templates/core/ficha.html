@@ -16,7 +16,7 @@
                 <h2>
                 </h1>
                  <h4>
-                       Producto Disponible
+                      {{producto.disponibilidad}}
 
                     {% comment %} ID: {{ producto.idprod }}  {% endcomment %}
                 </h4> 
@@ -35,13 +35,15 @@
                 </h4><br>
                 <h4>{{ producto.nomprod }}<br><br></h4>
                 <h4>Descripción: {{ producto.descprod }}</h4><br>  
-                {% if user.is_authenticated and user.perfilusuario.tipousu == 'Cliente' or not user.perfilusuario.tipousu %}    
+                {% if user.is_authenticated and user.perfilusuario.tipousu == 'Cliente' or not user.perfilusuario.tipousu %}  
+                    {% if producto.disponibilidad == 'PRODUCTO DISPONIBLE' %}
                     <form method="POST">
                         <input type="submit" class="btn btn-primary" value="Comprar">
                         {% if mesg %}
                             <div id="form_message" class="alert alert-danger" role="alert">{{ mesg }}</div>
                         {% endif %}
                     </form><br>
+                    {% endif %}  
                 {% endif %}  
             </div>
         </div>

@@ -4,14 +4,14 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE SP_CREAR_SOLICITUD_SERVICIO
 
-    @descfac        VARCHAR(100),
-    @rutcli         VARCHAR(20),
+    @monto          INT,
     @tiposol        VARCHAR(50),
-    @fechavisita    DATE, 
     @descsol        VARCHAR(100),
+    @fechavisita    DATE, 
+    @rutcli         VARCHAR(20),
+    @descfac        VARCHAR(100),
     @nrofac         INT,
     @idprod         INT, 
-    @monto          INT,
     @estadogd       VARCHAR(50)
 AS
 
