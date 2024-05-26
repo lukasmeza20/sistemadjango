@@ -13,6 +13,7 @@ from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from django.db import connection
 import random
 import requests
+from django.contrib import messages
 
 def home(request):
     return render(request, "core/home.html")
@@ -318,6 +319,7 @@ def administrar_productos(request, action, id):
     return render(request, "core/administrar_productos.html", data)
 
 def registrar_usuario(request):
+    data = {"form": RegistrarUsuarioForm}
     if request.method == 'POST':
         form = RegistrarUsuarioForm(request.POST)
         if form.is_valid():
@@ -326,9 +328,11 @@ def registrar_usuario(request):
             tipousu = request.POST.get("tipousu")
             dirusu = request.POST.get("dirusu")
             PerfilUsuario.objects.update_or_create(user=user, rut=rut, tipousu=tipousu, dirusu=dirusu)
-            return redirect(iniciar_sesion)
-    form = RegistrarUsuarioForm()
-    return render(request, "core/registrar_usuario.html", context={'form': form})
+            messages.success(request, '¡Has sido registrado correctamente! Ahora puedes iniciar sesión.')
+            # return redirect(iniciar_sesion)
+        else:
+            messages.error(request, 'Registro de usuario fallido, inténtelo nuevamente.')
+    return render(request, "core/registrar_usuario.html", data)
 
 def perfil_usuario(request):
     data = {"mesg": "", "form": PerfilUsuarioForm}

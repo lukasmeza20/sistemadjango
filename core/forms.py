@@ -17,7 +17,7 @@ class IniciarSesionForm(Form):
 
 class RegistrarUsuarioForm(UserCreationForm):
     rut = forms.CharField(max_length=20, required=True, label="Rut")
-    tipousu = forms.CharField(max_length=50, required=True, label="Tipo de usuario", initial='admin')
+    tipousu = forms.CharField(max_length=50, required=True, label="Tipo de usuario", widget=forms.TextInput(attrs={'readonly': 'readonly'}), initial='Cliente')
     dirusu = forms.CharField(max_length=300, required=True, label="Dirección")
     class Meta:
         model = User
