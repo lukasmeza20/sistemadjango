@@ -2,12 +2,13 @@ import datetime
 from datetime import datetime, date, time
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
-from .models import Producto, PerfilUsuario, Factura
+from .models import Producto, PerfilUsuario, Factura, SolicitudServicio
 from .forms import ProductoForm, IniciarSesionForm
 from .forms import RegistrarUsuarioForm, PerfilUsuarioForm
 from .forms import IngresarSolicitudServicioForm
+from .forms import ModificarSolicitudForm
 #from .error.transbank_error import TransbankError
 from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from django.db import connection
@@ -455,3 +456,15 @@ def obtener_solicitudes_de_servicio(request):
         data = {'lista': solicitudes_de_servicio, 'tipousu': tipousu }
 
         return render(request, "core/obtener_solicitudes_de_servicio.html", data)
+
+def actualizar_solicitud_servicio(request, nrosol):
+    solicitud = get_object_or_404(SolicitudServicio, nrosol=nrosol) # Obtener la solicitud por su número
+    print(solicitud)
+
+    initial_data = {
+        'fechavisita': solicitud.fechavisita,
+        'horavisita': '10:00'
+    }
+
+    form = ModificarSolicitudForm(initial=initial_data)
+    return render(request, "core/modificar_solicitud.html", {'form': form})
