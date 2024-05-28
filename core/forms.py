@@ -51,8 +51,8 @@ class IngresarSolicitudServicioForm(Form):
 
 class ModificarSolicitudForm(Form):
     
-    # fechavisita = forms.DateField(label="Fecha de la visita",widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),input_formats=['%Y-%m-%d'])
-    fechavisita = forms.DateField(label="Fecha de la visita",widget=forms.SelectDateWidget(attrs={'class': 'form-control'}),input_formats=['%Y-%m-%d'])
+    fechavisita = forms.DateField(label="Modificar fecha",widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),input_formats=['%Y-%m-%d'])
+    # fechavisita = forms.CharField(label="Fecha de la visita",widget=forms.TextInput(attrs={'class': 'form-control'}))
     horavisita = forms.TimeField(required=False,label="Hora de la visita",widget=forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}))
     
     class Meta:

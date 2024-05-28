@@ -7,8 +7,22 @@
 
 {% block content %}
 <br>
-<form method="POST">
+<form style="margin-bottom: 20px;" method="POST">
+    {% comment %} <h6>Fecha actual: {{sol}}</h6> {% endcomment %}
     {% csrf_token %} {{ form.as_p }}
     <button class="btn btn-primary" type="submit">Modificar</button>
 </form>
+{% if messages %}
+{% for message in messages %}
+    {% if 'success' in message.tags %}
+        <div id="form_message" class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% elif 'error' in message.tags %}
+        <div id="form_message" class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+{% endfor %}
+{% endif %}
 {% endblock content %}

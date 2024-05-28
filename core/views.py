@@ -458,13 +458,21 @@ def obtener_solicitudes_de_servicio(request):
         return render(request, "core/obtener_solicitudes_de_servicio.html", data)
 
 def actualizar_solicitud_servicio(request, nrosol):
-    solicitud = get_object_or_404(SolicitudServicio, nrosol=nrosol) # Obtener la solicitud por su número
-    print(solicitud)
+    solicitud = get_object_or_404(SolicitudServicio, nrosol=nrosol)  # Obtener la solicitud por su número
+    sol = solicitud.fechavisita
+    if request.method == 'POST':
+        fechavisita = request.POST.get("fechavisita")
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("EXEC SP_ACTUALIZAR_SOLICITUD %s, %s", [fechavisita, nrosol])
+                messages.success(request, 'La solicitud se modificó correctamente.')
+                return redirect(obtener_solicitudes_de_servicio)
+        except Exception as e:
+            messages.error(request, f'No se pudo modificar la solicitud: {str(e)}')
 
     initial_data = {
         'fechavisita': solicitud.fechavisita,
         'horavisita': '10:00'
     }
-
     form = ModificarSolicitudForm(initial=initial_data)
-    return render(request, "core/modificar_solicitud.html", {'form': form})
+    return render(request, "core/modificar_solicitud.html", {'form': form,'sol':sol})
