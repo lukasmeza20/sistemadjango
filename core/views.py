@@ -10,8 +10,9 @@ from .forms import RegistrarUsuarioForm, PerfilUsuarioForm
 from .forms import IngresarSolicitudServicioForm
 from .forms import ModificarSolicitudForm
 #from .error.transbank_error import TransbankError
-from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
+
 from django.db import connection
+from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 import random
 import requests
 from django.contrib import messages
@@ -476,3 +477,19 @@ def actualizar_solicitud_servicio(request, nrosol):
     }
     form = ModificarSolicitudForm(initial=initial_data)
     return render(request, "core/modificar_solicitud.html", {'form': form,'sol':sol})
+
+
+# def actualizar_estado_solicitud(request, nrosol):
+#     action = request.GET.get('action')
+#     solicitud = get_object_or_404(SolicitudServicio, nrosol=nrosol)  # Obtener la solicitud por su número
+#     sol = solicitud.fechavisita
+    
+#     if action in ['Aceptar', 'Cerrar']:
+#         try:
+#             with connection.cursor() as cursor:
+#                 cursor.execute("EXEC SP_ACTUALIZAR_SOLICITUD %s, %s", [action, sol ,nrosol])
+#                 messages.success(request, f'La solicitud {nrosol} se modifico correctamente.')
+#         except Exception as e:
+#             messages.error(request, f'No se pudo modificar la solicitud {nrosol}: {str(e)}')
+
+#     return redirect('obtener_solicitudes_de_servicio')

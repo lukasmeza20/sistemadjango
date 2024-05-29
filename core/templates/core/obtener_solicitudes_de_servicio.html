@@ -53,9 +53,9 @@
                             <td>{{ sol.estadosol }}</td>
                             {% if user.perfilusuario.tipousu == 'Tecnico' or user.perfilusuario.tipousu == 'Administrador'%}
                             <td class="button-group">
-                                <button type="button" class="btn btn-sm btn-success">Aceptar</button>
+                                <button class="btn btn-sm btn-success"><a style="color: white; text-decoration: none;" href="">Aceptar</a></button>
                                 <button class="btn btn-primary"><a style="color: white; text-decoration: none;" href="{% url 'modificar' sol.nrosol %}">Modificar</a></button>
-                                <button type="button" class="btn btn-sm btn-danger">Cerrar</button>
+                                <button class="btn btn-sm btn-danger"><a style="color: white; text-decoration: none;" href="">Cerrar</a></button>
                             </td>
                             {% endif %}
                         </tr>

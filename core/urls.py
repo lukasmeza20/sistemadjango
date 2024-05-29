@@ -8,6 +8,7 @@ from .views import iniciar_pago
 from .views import pago_exitoso
 from .views import obtener_solicitudes_de_servicio
 from .views import actualizar_solicitud_servicio
+# from .views import actualizar_estado_solicitud
 
 urlpatterns = [
     path('', home, name="home"),
@@ -30,4 +31,5 @@ urlpatterns = [
     path('perfil_usuario/', perfil_usuario, name="perfil_usuario"),
     path('obtener_solicitudes_de_servicio/', obtener_solicitudes_de_servicio, name="obtener_solicitudes_de_servicio"),
     path('modificar/<int:nrosol>/', actualizar_solicitud_servicio, name='modificar'),
+    # path('actualizar-estado-solicitud/<int:nrosol>/', actualizar_estado_solicitud, name='actualizar_estado_solicitud'),
 ]
