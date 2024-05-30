@@ -218,7 +218,9 @@ def iniciar_pago(request, id):
     buy_order = str(random.randrange(1000000, 99999999))
     session_id = request.user.username
     amount = Producto.objects.get(idprod=id).precio
-    return_url = 'http://127.0.0.1:8000/pago_exitoso/'
+    prod = get_object_or_404(Producto, idprod=id)
+# Construir la URL de retorno incluyendo el identificador del producto
+    return_url = f'http://127.0.0.1:8000/pago_exitoso/?prod={prod.idprod}'
 
     # response = Transaction.create(buy_order, session_id, amount, return_url)
     commercecode = "597055555532"
@@ -250,7 +252,11 @@ def iniciar_pago(request, id):
 
 @csrf_exempt
 def pago_exitoso(request):
-
+    prod_id = request.GET.get('prod')
+    prod_id = int(prod_id)
+    prod = get_object_or_404(Producto, idprod=prod_id)
+    idprod = prod.idprod
+    descfac = prod.nomprod
     if request.method == "GET":
         token = request.GET.get("token_ws")
         print("commit for token_ws: {}".format(token))
@@ -259,6 +265,7 @@ def pago_exitoso(request):
         tx = Transaction(options=WebpayOptions(commerce_code=commercecode, api_key=apikey, integration_type="TEST"))
         response = tx.commit(token=token)
         print("response: {}".format(response))
+
 
         user = User.objects.get(username=response['session_id'])
         perfil = PerfilUsuario.objects.get(user=user)
@@ -277,6 +284,17 @@ def pago_exitoso(request):
             "dirusu": perfil.dirusu,
             "response_code": response['response_code']
         }
+        rutcli = perfil.rut
+        monto = response['amount']
+
+        with connection.cursor() as cursor:
+                cursor.execute("""
+                    EXEC SP_CREAR_FACTURA 
+                    @descfac=%s, @monto=%s, 
+                    @rutcli=%s, @idprod=%s
+                """, [descfac,monto, rutcli, idprod])
+                print(f"Se completo la factura del cliente con rut {rutcli} del producto {descfac} de id {idprod} con el total de {monto}")
+
 
         return render(request, "core/pago_exitoso.html", context)
     else:

@@ -10,13 +10,12 @@ CREATE PROCEDURE SP_CREAR_SOLICITUD_SERVICIO
     @fechavisita    DATE, 
     @rutcli         VARCHAR(20),
     @descfac        VARCHAR(100),
-    @nrofac         INT,
     @idprod         INT, 
     @estadogd       VARCHAR(50)
 AS
 
 BEGIN
-
+    DECLARE @nrofac AS INT
     SET @nrofac = (SELECT MAX(nrofac) + 1 FROM FACTURA)
 
     INSERT INTO Factura(nrofac,rutcli,idprod,fechafac, descfac,monto)
