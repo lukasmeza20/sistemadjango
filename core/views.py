@@ -295,7 +295,6 @@ def pago_exitoso(request):
                 """, [descfac,monto, rutcli, idprod])
                 print(f"Se completo la factura del cliente con rut {rutcli} del producto {descfac} de id {idprod} con el total de {monto}")
 
-
         return render(request, "core/pago_exitoso.html", context)
     else:
         return redirect(home)
