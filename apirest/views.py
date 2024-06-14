@@ -117,6 +117,52 @@ def obtener_equipos_en_bodega(request):
 
 @csrf_exempt
 @api_view(['GET'])
+def consultar_guias_despacho (request):
+    if request.method == 'GET':
+        cursor = connection.cursor()
+
+        # Ejecutar el procedimiento almacenado
+        cursor.execute("EXEC SP_OBTENER_GUIAS_DE_DESPACHO")
+
+        # Obtener los resultados
+        results = cursor.fetchall()
+
+        # Convertir los resultados en una lista de diccionarios
+        data = []
+        for row in results:
+            nrogd = row[0]
+            nomprod = row[1]
+            estadogd = row[2]
+            nrofac = row[3]
+            nomcli = row[4]
+            
+            data.append({
+                'nrogd': nrogd,
+                'nomprod': nomprod,
+                'estadogd': estadogd,
+                'nrofac': nrofac,
+                'nomcli':nomcli
+            })
+
+        # Devolver los datos como respuesta JSON
+        return JsonResponse(data, safe=False)
+    
+
+@csrf_exempt
+@api_view(['GET'])
+def actualizar_estado_guia_despacho(request, nrogd, estadogd):
+    if request.method == 'GET':
+        try:
+            cursor = connection.cursor()
+            # Pasar los parámetros nrogd y estadogd al procedimiento almacenado
+            cursor.execute("EXEC SP_ACTUALIZAR_ESTADO_GUIA_DESPACHO @nrogd=%s, @estadogd=%s", [nrogd, estadogd])
+            return JsonResponse({'mensaje': 'Estado actualizado con éxito'}, safe=False)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+            
+@csrf_exempt
+@api_view(['GET'])
 def obtener_productos(request):
     if request.method == 'GET':
         cursor = connection.cursor()

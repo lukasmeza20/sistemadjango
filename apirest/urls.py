@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib import admin
-from .views import producto_create, producto_read, producto_read_all
+from .views import actualizar_estado_guia_despacho, consultar_guias_despacho, producto_create, producto_read, producto_read_all
 from .views import producto_update, producto_delete, login, obtener_equipos_en_bodega, obtener_productos, autenticar
 
 urlpatterns = [
@@ -11,6 +11,8 @@ urlpatterns = [
     path('producto_delete/<id>/', producto_delete, name="producto_delete"),
     path('login', login, name='login'),
     path('obtener_equipos_en_bodega', obtener_equipos_en_bodega, name='obtener_equipos_en_bodega'),
+    path('consultar_guias_despacho', consultar_guias_despacho, name='consultar_guias_despacho'),
+    path('actualizar_estado_guia_despacho/<int:nrogd>/<str:estadogd>', actualizar_estado_guia_despacho, name='actualizar_estado_guia_despacho'),
     path('obtener_productos', obtener_productos, name='obtener_productos'),
     path('autenticar/<tipousu>/<username>/<password>', autenticar, name="autenticar"),
 ]
